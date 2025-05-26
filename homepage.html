@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tempestosoh - Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -36,19 +36,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 30px 50px;
+      padding: 20px 30px;
       background: #111;
       border-bottom: 2px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: #fff;
     }
 
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
     nav a {
-      margin: 0 15px;
       text-decoration: none;
       color: #fff;
       font-weight: bold;
@@ -73,20 +80,35 @@
       transform-origin: left;
     }
 
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      background: white;
+      height: 3px;
+      margin: 4px 0;
+      width: 25px;
+      border-radius: 2px;
+    }
+
     .hero {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 100px 50px;
+      padding: 80px 30px;
     }
 
     .hero-text {
-      max-width: 600px;
+      flex: 1 1 300px;
+      margin-bottom: 30px;
     }
 
     .hero-text h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: #fff;
     }
 
@@ -98,6 +120,7 @@
       font-size: 1.2rem;
       margin: 20px 0;
       color: #ccc;
+      height: 1.5em;
     }
 
     .hero-text .btn {
@@ -112,27 +135,34 @@
       font-weight: bold;
     }
 
+    .hero-img {
+      flex: 1 1 250px;
+      display: flex;
+      justify-content: center;
+    }
+
     .hero-img img {
-      max-width: 300px;
+      width: 100%;
+      max-width: 250px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
     }
 
     .section {
-      padding: 80px 50px;
+      padding: 60px 30px;
     }
 
     .section h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
       border-left: 5px solid red;
       padding-left: 15px;
     }
 
     .card {
       background: #1a1a1a;
-      padding: 30px;
-      margin-bottom: 30px;
+      padding: 20px;
+      margin-bottom: 20px;
       border-radius: 16px;
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
     }
@@ -141,7 +171,7 @@
       color: red;
     }
 
-    .card p {
+    .card p, .card a {
       color: #ccc;
     }
 
@@ -182,18 +212,79 @@
 
     footer {
       background: #111;
-      padding: 40px;
+      padding: 30px;
       text-align: center;
       color: #555;
       font-size: 0.9rem;
+    }
+
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #b30000;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #111;
+        width: 100%;
+        flex-direction: column;
+        display: none;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-img {
+        margin-top: 30px;
+      }
+
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .hero-text p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="bg-animation"></div>
+
   <header>
     <div class="logo">Tempestosoh</div>
-    <nav>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <nav id="nav">
       <a href="#">Home</a>
       <a href="#chi">Chi Sono</a>
       <a href="#progetti">Progetti</a>
@@ -204,7 +295,7 @@
   <section class="hero">
     <div class="hero-text">
       <h1>Hi, I'm <span>Tempestosoh</span><br>Developer</h1>
-      <p>👾 Coding the Future with Style</p>
+      <p>👾 </p>
       <a href="#contatti" class="btn">Contact</a>
     </div>
     <div class="hero-img">
@@ -249,7 +340,48 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 - Alessio aka Tempestosoh</p>
+    <p>&copy; <span id="anno"></span> - Alessio aka Tempestosoh</p>
   </footer>
+
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Torna su">⬆</button>
+
+  <script>
+    const texts = ["Web developer", "Plugin Maker", "IT Student", "Italian student 🇮🇹"];
+    let count = 0;
+    let index = 0;
+    let currentText = '';
+    let letter = '';
+    function type() {
+      if (count === texts.length) count = 0;
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
+      document.querySelector(".hero-text p").textContent = "👾 " + letter;
+      if (letter.length === currentText.length) {
+        setTimeout(() => {
+          index = 0;
+          count++;
+          setTimeout(type, 400);
+        }, 1200);
+      } else {
+        setTimeout(type, 100);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+
+    const btn = document.getElementById("scrollTopBtn");
+    window.onscroll = () => {
+      btn.style.display = (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.getElementById("anno").textContent = new Date().getFullYear();
+
+    function toggleMenu() {
+      const nav = document.getElementById("nav");
+      nav.classList.toggle("show");
+    }
+  </script>
 </body>
 </html>
