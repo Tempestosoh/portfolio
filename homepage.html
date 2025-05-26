@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempestosoh - React Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://cdn.jsdelivr.net/gh/JulianLaval/canvas-particle-network/particle-network-animation.gif');
+      background-size: cover;
+      z-index: -1;
+      opacity: 0.05;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 50px;
+      background: #111;
+      border-bottom: 2px solid #222;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: red;
+      bottom: -5px;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 100px 50px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      color: #fff;
+    }
+
+    .hero-text h1 span {
+      color: red;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+      color: #ccc;
+    }
+
+    .hero-text .btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero-img img {
+      max-width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+    }
+
+    .section {
+      padding: 80px 50px;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      border-left: 5px solid red;
+      padding-left: 15px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      color: red;
+    }
+
+    .card p {
+      color: #ccc;
+    }
+
+    .btn {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn.disabled {
+      background: #444;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .skillbar {
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .skillbar span {
+      display: block;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .html { background: linear-gradient(to right, red 100%, #333 0%); }
+    .css { background: linear-gradient(to right, red 100%, #333 0%); }
+    .python { background: linear-gradient(to right, red 45%, #333 45%); }
+    .java { background: linear-gradient(to right, red 20%, #333 20%); }
+
+    footer {
+      background: #111;
+      padding: 40px;
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+  <header>
+    <div class="logo">Tempestosoh</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#chi">Chi Sono</a>
+      <a href="#progetti">Progetti</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm <span>Tempestosoh</span><br>React.js Developer</h1>
+      <p>👾 Coding the Future with Style</p>
+      <a href="#contatti" class="btn">Contact</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://i.imgur.com/lRY3j5x.png" alt="Foto Profilo">
+    </div>
+  </section>
+
+  <section class="section" id="chi">
+    <h2>Chi Sono</h2>
+    <div class="card">
+      <p>Mi chiamo Alessio, conosciuto online come <strong>Tempestosoh</strong>. Vivo nel nord Italia e frequento un ITIS indirizzo informatico. Questo è il mio sito personale dove raccolgo i miei progetti e le mie competenze nel mondo del coding.</p>
+    </div>
+  </section>
+
+  <section class="section" id="progetti">
+    <h2>Progetti</h2>
+    <div class="card">
+      <h3>🌍 Apocaliss</h3>
+      <p>Un progetto web creativo e apocalittico.</p>
+      <a href="https://tempestosoh.github.io/apocaliss/hpage.html" target="_blank" class="btn">Visita</a>
+    </div>
+    <div class="card">
+      <h3>🚨 PunisherX</h3>
+      <p>Plugin Minecraft avanzato per la moderazione, ispirato a LiteBans, con dashboard integrata.</p>
+      <span class="btn disabled">Coming Soon</span>
+    </div>
+    <div class="card">
+      <h3>🧠 Competenze</h3>
+      <div class="skillbar html"><span>HTML - 100%</span></div>
+      <div class="skillbar css"><span>CSS - 100%</span></div>
+      <div class="skillbar python"><span>Python - 45%</span></div>
+      <div class="skillbar java"><span>Java - 20%</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="contatti">
+    <h2>Contatti</h2>
+    <div class="card">
+      <p>📨 Discord: <strong>Tempestosoh</strong></p>
+      <p>🌐 GitHub: <a href="https://github.com/Tempestosoh" target="_blank">github.com/Tempestosoh</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - Alessio aka Tempestosoh</p>
+  </footer>
+</body>
+</html>
