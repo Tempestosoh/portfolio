@@ -2,496 +2,89 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tempestosoh - Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beta | Tempestosoh</title>
   <style>
     :root {
-      --bg: #0d0d0d;
-      --text: #fff;
-      --secondary: #ccc;
-      --card: #1a1a1a;
-      --border: #222;
-      --primary: red;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --bg: #ffffff;
+      --text: #000000;
+      --card: #f9f9f9;
+      --border: #cccccc;
+      --alert: #ff2e2e;
+      --alert-bg: #ffeaea;
     }
 
-    body.light {
-      --bg: #f4f4f4;
-      --text: #000;
-      --secondary: #333;
-      --card: #fff;
-      --border: #ddd;
-      --primary: #e60000;
-      --shadow: rgba(255, 0, 0, 0.2);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d0d;
+        --text: #ffffff;
+        --card: #1a1a1a;
+        --border: #333333;
+        --alert: #ff2e2e;
+        --alert-bg: #3b0000;
+      }
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .bg-animation {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://cdn.jsdelivr.net/gh/JulianLaval/canvas-particle-network/particle-network-animation.gif');
-      background-size: cover;
-      z-index: -1;
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    /* Loader Styles */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: var(--bg);
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      z-index: 999999;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    #loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .spinner {
-      width: 60px;
-      height: 60px;
-      border: 6px solid var(--card);
-      border-top: 6px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 30px;
-      background: var(--bg);
-      border-bottom: 2px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
-      color: var(--text);
-      flex-shrink: 0;
-      min-width: 120px;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: bold;
-      position: relative;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: var(--primary);
-      bottom: -5px;
-      left: 0;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
-
-    nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    .toggle-btn {
-      margin-left: 20px;
-      padding: 6px 14px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 100px 30px;
-    }
-
-    .hero-text {
-      max-width: 600px;
-      flex: 1 1 300px;
-    }
-
-    .hero-text h1 {
-      font-size: 2.8rem;
-    }
-
-    .hero-text h1 span {
-      color: var(--primary);
-    }
-
-    .hero-text p {
-      font-size: 1.2rem;
-      margin: 20px 0;
-      color: var(--secondary);
-    }
-
-    .btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
-    .btn.disabled {
-      background: #444;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .hero-img {
-      flex: 1 1 250px;
+      height: 100vh;
       text-align: center;
     }
 
-    .hero-img img {
-      max-width: 250px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px var(--shadow);
-      margin-top: 30px;
-    }
-
-    .section {
-      padding: 60px 30px;
-    }
-
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      border-left: 5px solid var(--primary);
-      padding-left: 15px;
-    }
-
-    .card {
-      background: var(--card);
+    .warning-box {
+      background-color: var(--card);
+      border-left: 6px solid var(--alert);
       padding: 30px;
-      margin-bottom: 30px;
-      border-radius: 16px;
-      box-shadow: 0 0 15px var(--shadow);
+      max-width: 600px;
+      width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
     }
 
-    .card h3 {
-      color: var(--primary);
+    .warning-box h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--alert);
     }
 
-    .card p {
-      color: var(--secondary);
+    .warning-box p {
+      font-size: 1.2rem;
+      color: var(--text);
     }
 
-    .skillbar {
-      background: #333;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 10px 0;
+    .back-link {
+      margin-top: 30px;
+      display: inline-block;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
     }
 
-    .skillbar span {
-      display: block;
-      padding: 10px;
-      color: white;
-      font-weight: bold;
-    }
-
-    .html { background: linear-gradient(to right, var(--primary) 100%, #333 0%); }
-    .css { background: linear-gradient(to right, var(--primary) 100%, #333 0%); }
-    .python { background: linear-gradient(to right, var(--primary) 45%, #333 45%); }
-    .java { background: linear-gradient(to right, var(--primary) 20%, #333 20%); }
-
-    footer {
-      background: var(--bg);
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--secondary);
-      font-size: 0.9rem;
-    }
-
-    #toTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      display: none;
-      z-index: 9999;
-      transition: background 0.3s;
-    }
-
-    #toTopBtn:hover {
-      background: darkred;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .hero-text {
-        max-width: 100%;
-      }
-
-      .hero-img {
-        margin-top: 20px;
-      }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-      }
-
-      nav {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: start;
-        margin-top: 10px;
-      }
-
-      nav a {
-        margin: 5px 10px;
-      }
+    .back-link:hover {
+      background-color: var(--alert-bg);
     }
   </style>
 </head>
 <body>
-  <!-- Loader -->
-  <div id="loader">
-    <div class="spinner"></div>
+
+  <div class="warning-box">
+    <h1>⚠️ Nessuna beta in sviluppo</h1>
+    <p>Al momento non ci sono versioni beta attive o in lavorazione.<br>Resta aggiornato controllando questa pagina o seguendo i miei canali!</p>
   </div>
 
-  <div class="bg-animation"></div>
-  <header>
-    <div class="logo">Tempestosoh</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#chi">Chi Sono</a>
-      <a href="#progetti">Progetti</a>
-      <a href="#contatti">Contatti</a>
-      <button class="toggle-btn" onclick="toggleTheme()">🌓</button>
-    </nav>
-  </header>
+  <a class="back-link" href="https://tempestosoh.github.io/portfolio/homepage.html">🔙 Torna alla homepage</a>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Hi, I'm <span>Tempestosoh</span><br>Developer</h1>
-      <p>👾 Coding the Future with Style</p>
-      <a href="#contatti" class="btn">Contact</a>
-    </div>
-    <div class="hero-img">
-      <img src="logo.png" alt="Foto Profilo">
-    </div>
-  </section>
-
-  <section class="section" id="chi">
-    <h2>Chi Sono</h2>
-    <div class="card">
-      <p>Mi chiamo Alessio, conosciuto online come <strong>Tempestosoh</strong>. Vivo nel nord Italia e frequento un ITIS indirizzo informatico. Questo è il mio sito personale dove raccolgo i miei progetti e le mie competenze nel mondo del coding.</p>
-    </div>
-  </section>
-
-  <section class="section" id="progetti">
-    <h2>Progetti</h2>
-    <div class="card">
-      <h3>🌍 Apocaliss</h3>
-      <p>Un sito web per un bot discord</p>
-      <a href="https://tempestosoh.github.io/apocaliss/hpage.html" target="_blank" class="btn">Visita</a>
-    </div>
-    <div class="card">
-      <h3>🚨 HTML Preview</h3>
-      <p>Una pagina dedicata alla preview web di un file html</p>
-      <a href="https://tempestosoh.github.io/portfolio/htmlpreview.html" target="_blank" class="btn">Visita</a>
-    </div>
-    <div class="card">
-      <h3>🧠 Competenze</h3>
-      <div class="skillbar html"><span>HTML - 100%</span></div>
-      <div class="skillbar css"><span>CSS - 100%</span></div>
-      <div class="skillbar python"><span>Python - 45%</span></div>
-      <div class="skillbar java"><span>Java - 20%</span></div>
-    </div>
-  </section>
-<section class="section" id="contatti">
-  <h2>Contatti e link utili</h2>
-  <div class="card">
-    <p>📨 Discord: <strong>Tempestosoh</strong></p>
-    <p>🌐 GitHub: <a href="https://github.com/Tempestosoh" target="_blank">github.com/Tempestosoh</a></p>
-    <p>📚 GitBook: <a href="https://tempestosoh.gitbook.io/docs" target="_blank">tempestosoh.gitbook.io/docs</a></p>
-    <p>🔗 Hosting: <a href="https://billing.walehost.com/aff.php?aff=249" target="_blank">walehost.com</a></p>
-    
-    <hr style="margin: 30px 0; border-color: var(--border);">
-
-    <h3 style="margin-bottom: 20px;">✉️ Scrivimi un messaggio</h3>
-
-    <form id="contactForm" action="https://formsubmit.co/alessiod2010vr@gmail.com" method="POST" onsubmit="return validateCaptcha(event)">
-      <!-- Formsubmit hidden inputs -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_autoresponse" value="Grazie per avermi scritto! Ti risponderò il prima possibile.">
-      <input type="hidden" name="_next" value="https://tempestosoh.github.io/portfolio/homepage.html">
-
-      <!-- Nome -->
-      <label for="name">Nome:</label><br>
-      <input type="text" id="name" name="name" required><br><br>
-
-      <!-- Email -->
-      <label for="email">Email:</label><br>
-      <input type="email" id="email" name="email" required><br><br>
-
-      <!-- Messaggio -->
-      <label for="message">Messaggio:</label><br>
-      <textarea id="message" name="message" rows="5" required></textarea><br><br>
-
-      <!-- CAPTCHA -->
-      <label for="captcha">Quanto fa <span id="num1"></span> + <span id="num2"></span>?</label><br>
-      <input type="number" id="captcha" required><br><br>
-
-      <!-- Pulsante -->
-      <button type="submit" class="btn">Invia</button>
-    </form>
-  </div>
-</section>
-
-<script>
-  let n1, n2;
-
-  // Genera due numeri casuali all'apertura della pagina
-  function generateCaptcha() {
-    n1 = Math.floor(Math.random() * 9) + 1;
-    n2 = Math.floor(Math.random() * 9) + 1;
-    document.getElementById("num1").textContent = n1;
-    document.getElementById("num2").textContent = n2;
-  }
-
-  // Valida il CAPTCHA prima dell'invio
-  function validateCaptcha(event) {
-    const userAnswer = parseInt(document.getElementById("captcha").value);
-    if (userAnswer !== n1 + n2) {
-      alert("❌ CAPTCHA errato. Riprova.");
-      event.preventDefault();
-      generateCaptcha(); // rigenera il captcha
-      return false;
-    }
-    alert("✅ Messaggio inviato correttamente! La pagina verrà ricaricata a momenti.");
-    return true;
-  }
-
-  // Avvia il CAPTCHA all’apertura
-  window.onload = generateCaptcha;
-</script>
-
-<style>
-  form input, form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text);
-  }
-</style>
-
-  </div>
-</section>
-
-  </div>
-</section>
-
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 - Alessio aka Tempestosoh</p>
-  </footer>
-
-  <button onclick="scrollToTop()" id="toTopBtn">↑</button>
-
-  <script>
-    // Dark/light mode toggle
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-    }
-
-    // Show scroll-to-top button
-    const toTopBtn = document.getElementById("toTopBtn");
-    window.onscroll = () => {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        toTopBtn.style.display = "block";
-      } else {
-        toTopBtn.style.display = "none";
-      }
-    };
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Loader hiding logic
-    window.addEventListener("load", () => {
-      const loader = document.getElementById("loader");
-      loader.classList.add("hidden");
-    });
-  </script>
 </body>
 </html>
