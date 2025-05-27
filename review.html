@@ -95,6 +95,41 @@
         width: 100%;
       }
     }
+      .toggle-btn {
+      margin-left: 20px;
+      padding: 6px 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+      nav.show {
+        display: flex;
+      }
+      nav a, nav .toggle-btn {
+        margin: 10px 0;
+      }
+      .hamburger {
+        display: block;
+        margin-left: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -103,7 +138,9 @@
     <nav>
       <a href="homepage.html">Home</a>
       <a href="progetti.html">Progetti</a>
+    <button class="toggle-btn" onclick="toggleTheme()">🌓</button>
     </nav>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
   </header>
 
   <section class="section">
@@ -143,6 +180,17 @@
   <footer>
     <p>&copy; 2025 - Alessio aka Tempestosoh</p>
   </footer>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('light');
+  }
+
+  function toggleMenu() {
+    const nav = document.querySelector('nav');
+    nav.classList.toggle('show');
+  }
+</script>
 <script>
   // Blocco doppio invio in un mese
   const lastVote = localStorage.getItem("lastFeedback");
