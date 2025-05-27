@@ -2,89 +2,198 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Soon | Tempestosoh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutti i progetti - Tempestosoh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #000000;
-      --card: #f9f9f9;
-      --border: #cccccc;
-      --alert: #ff2e2e;
-      --alert-bg: #ffeaea;
+      --bg: #0d0d0d;
+      --text: #fff;
+      --secondary: #ccc;
+      --card: #1a1a1a;
+      --border: #222;
+      --primary: red;
+      --shadow: rgba(255, 0, 0, 0.2);
     }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d0d0d;
-        --text: #ffffff;
-        --card: #1a1a1a;
-        --border: #333333;
-        --alert: #ff2e2e;
-        --alert-bg: #3b0000;
-      }
+    body.light {
+      --bg: #f4f4f4;
+      --text: #000;
+      --secondary: #333;
+      --card: #fff;
+      --border: #ddd;
+      --primary: #e60000;
+      --shadow: rgba(255, 0, 0, 0.2);
     }
-
     body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+      padding: 20px 30px;
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
-
-    .warning-box {
-      background-color: var(--card);
-      border-left: 6px solid var(--alert);
-      padding: 30px;
-      max-width: 600px;
-      width: 90%;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-    }
-
-    .warning-box h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: var(--alert);
-    }
-
-    .warning-box p {
-      font-size: 1.2rem;
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
       color: var(--text);
     }
-
-    .back-link {
-      margin-top: 30px;
-      display: inline-block;
-      font-size: 1rem;
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
       color: var(--text);
+      cursor: pointer;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav a {
+      margin: 0 10px;
       text-decoration: none;
-      border: 1px solid var(--border);
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background-color 0.3s;
+      color: var(--text);
+      font-weight: bold;
     }
-
-    .back-link:hover {
-      background-color: var(--alert-bg);
+    .toggle-btn {
+      margin-left: 20px;
+      padding: 6px 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .section {
+      padding: 60px 30px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      border-left: 5px solid var(--primary);
+      padding-left: 15px;
+    }
+    .card {
+      background: var(--card);
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px var(--shadow);
+    }
+    .card h3 {
+      color: var(--primary);
+    }
+    .card p {
+      color: var(--secondary);
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .btn.disabled {
+      background: #444;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    footer {
+      background: var(--bg);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+      nav.show {
+        display: flex;
+      }
+      nav a, nav button.toggle-btn {
+        margin: 10px 0;
+      }
+      header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo">Tempestosoh</div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav id="mainNav">
+      <a href="https://tempestosoh.github.io/portfolio/homepage.html">Home</a>
+      <a href="https://tempestosoh.github.io/portfolio/homepage.html#contatti">Contatti</a>
+      <button class="toggle-btn" onclick="toggleTheme()">🌓</button>
+    </nav>
+  </header>
 
-  <div class="warning-box">
-    <h1>⚠️ Pagina in via di sviluppo</h1>
-    <p>Al momento non ci sono versioni stabili o beta attive di questa pagina.<br>Resta aggiornato controllando questa pagina o seguendo i miei canali per scoprire quando verrà inaugurata!</p>
-  </div>
+  <section class="section">
+    <h2>Tutti i Progetti</h2>
 
-  <a class="back-link" href="https://tempestosoh.github.io/portfolio/homepage.html">🔙 Torna alla homepage</a>
+    <div class="card">
+      <img src="assets/progetto1.jpg" alt="Screenshot Progetto 1">
+      <h3>🔨 PunisherX</h3>
+      <p>Un plugin minecraft per la moderazione completo di dashboard web. IN VIA DI SVILUPPO</p>
+      <a href="#" class="btn disabled">Non disponibile</a>
+    </div>
 
+<div class="card">
+  <h3>🚀 Molti altri progetti in arrivo</h3>
+  <p>Stare sintonizzati per le prossime novità nel mondo del coding!</p>
+</div>
+
+
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - Alessio aka Tempestosoh</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("mainNav");
+      nav.classList.toggle("show");
+    }
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+  </script>
 </body>
 </html>
