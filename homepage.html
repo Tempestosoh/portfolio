@@ -370,14 +370,94 @@
       <div class="skillbar java"><span>Java - 20%</span></div>
     </div>
   </section>
+<section class="section" id="contatti">
+  <h2>Contatti e link utili</h2>
+  <div class="card">
+    <p>📨 Discord: <strong>Tempestosoh</strong></p>
+    <p>🌐 GitHub: <a href="https://github.com/Tempestosoh" target="_blank">github.com/Tempestosoh</a></p>
+    <p>📚 GitBook: <a href="https://tempestosoh.gitbook.io/docs" target="_blank">tempestosoh.gitbook.io/docs</a></p>
+    <p>🔗 Hosting: <a href="https://billing.walehost.com/aff.php?aff=249" target="_blank">walehost.com</a></p>
+    
+    <hr style="margin: 30px 0; border-color: var(--border);">
 
-  <section class="section" id="contatti">
-    <h2>Contatti e link utili</h2>
-    <div class="card">
-      <p>📨 Discord: <strong>Tempestosoh</strong></p>
-      <p>🌐 GitHub: <a href="https://github.com/Tempestosoh" target="_blank">github.com/Tempestosoh</a></p>
-      <p>📚 GitBook: <a href="https://tempestosoh.gitbook.io/docs" target="_blank">tempestosoh.gitbook.io/docs</a></p>
-      <p>🔗 Hosting: <a href="https://billing.walehost.com/aff.php?aff=249" target="_blank">https://billing.walehost.com/aff.php?aff=249</a></p>
+    <h3 style="margin-bottom: 20px;">✉️ Scrivimi un messaggio</h3>
+
+    <form id="contactForm" action="https://formsubmit.co/alessiod2010vr@gmail.com" method="POST" onsubmit="return validateCaptcha(event)">
+      <!-- Formsubmit hidden inputs -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Grazie per avermi scritto! Ti risponderò il prima possibile.">
+      <input type="hidden" name="_next" value="https://tempestosoh.github.io/portfolio/homepage.html">
+
+      <!-- Nome -->
+      <label for="name">Nome:</label><br>
+      <input type="text" id="name" name="name" required><br><br>
+
+      <!-- Email -->
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+
+      <!-- Messaggio -->
+      <label for="message">Messaggio:</label><br>
+      <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+      <!-- CAPTCHA -->
+      <label for="captcha">Quanto fa <span id="num1"></span> + <span id="num2"></span>?</label><br>
+      <input type="number" id="captcha" required><br><br>
+
+      <!-- Pulsante -->
+      <button type="submit" class="btn">Invia</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  let n1, n2;
+
+  // Genera due numeri casuali all'apertura della pagina
+  function generateCaptcha() {
+    n1 = Math.floor(Math.random() * 9) + 1;
+    n2 = Math.floor(Math.random() * 9) + 1;
+    document.getElementById("num1").textContent = n1;
+    document.getElementById("num2").textContent = n2;
+  }
+
+  // Valida il CAPTCHA prima dell'invio
+  function validateCaptcha(event) {
+    const userAnswer = parseInt(document.getElementById("captcha").value);
+    if (userAnswer !== n1 + n2) {
+      alert("❌ CAPTCHA errato. Riprova.");
+      event.preventDefault();
+      generateCaptcha(); // rigenera il captcha
+      return false;
+    }
+    alert("✅ Messaggio inviato correttamente! La pagina verrà ricaricata a momenti.");
+    return true;
+  }
+
+  // Avvia il CAPTCHA all’apertura
+  window.onload = generateCaptcha;
+</script>
+
+<style>
+  form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+  }
+</style>
+
+  </div>
+</section>
+
+  </div>
+</section>
+
     </div>
   </section>
 
