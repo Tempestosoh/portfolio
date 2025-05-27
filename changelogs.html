@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog - Tempestosoh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --text: #fff;
+      --secondary: #ccc;
+      --card: #1a1a1a;
+      --border: #222;
+      --primary: red;
+      --shadow: rgba(255, 0, 0, 0.2);
+    }
+
+    body.light {
+      --bg: #f4f4f4;
+      --text: #000;
+      --secondary: #333;
+      --card: #fff;
+      --border: #ddd;
+      --primary: #e60000;
+      --shadow: rgba(255, 0, 0, 0.2);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .toggle-btn {
+      margin-left: 20px;
+      padding: 6px 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 60px 30px;
+    }
+
+    .section h1 {
+      font-size: 2.2rem;
+      border-left: 5px solid var(--primary);
+      padding-left: 15px;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 0 auto;
+      padding-left: 20px;
+      border-left: 3px solid var(--primary);
+      max-width: 800px;
+    }
+
+    .changelog-entry {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px var(--shadow);
+      position: relative;
+    }
+
+    .changelog-entry::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .entry-header {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .entry-header time {
+      font-weight: normal;
+      font-size: 0.9rem;
+      color: var(--secondary);
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .entry-body {
+      padding-left: 22px;
+      margin-top: 10px;
+    }
+
+    .entry-body ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .entry-body li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .changelog-entry.collapsed .entry-body {
+      display: none;
+    }
+
+    .changelog-entry.collapsed .arrow {
+      transform: rotate(-90deg);
+    }
+
+    .badge {
+      background: var(--primary);
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      margin-left: 10px;
+    }
+
+    footer {
+      background: var(--bg);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      nav a, nav .toggle-btn {
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: block;
+        margin-left: auto;
+      }
+
+      .timeline {
+        padding-left: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Tempestosoh</div>
+    <nav id="mainNav">
+      <a href="homepage.html">Home</a>
+      <a href="progetti.html">Progetti</a>
+      <a href="feedback.html">Feedback</a>
+      <button class="toggle-btn" onclick="toggleTheme()">🌓</button>
+    </nav>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <section class="section">
+    <h1>📝 Changelog</h1>
+    <div class="timeline">
+
+      <div class="changelog-entry">
+        <div class="entry-header" onclick="toggleEntry(this)">
+          <span class="arrow">▼</span>
+          v1.3.0 – <time datetime="2025-05-27">27 maggio 2025</time>
+          <span class="badge">🛠️ IN SVILUPPO</span>
+        </div>
+        <div class="entry-body">
+          <ul>
+            <li>🆕 Aggiunta pagina generatore password sicure</li>
+            <li>📩 Miglioria pagina feedback</li>
+            <li>🌓 risoluzione bug tema</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="changelog-entry collapsed">
+        <div class="entry-header" onclick="toggleEntry(this)">
+          <span class="arrow">▶</span>
+          v1.2.0 – <time datetime="2025-05-20">27 maggio 2025</time>
+          <span class="badge">✅ STABILE/span>
+        </div>
+        <div class="entry-body">
+          <ul>
+            <li>🧪 Aggiunta pagina progetti</li>
+            <li>🐛 Corretto bug hamburger su mobile</li>
+            <li>💡 Miglioramenti accessibilità</li>
+            <li>🆕 Aggiunta pagina changelog con toggle</li>
+            <li>📩 Feedback migliorato con redirect personalizzato</li>
+            <li>🌓 Tema chiaro/scuro persistente</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="changelog-entry collapsed">
+        <div class="entry-header" onclick="toggleEntry(this)">
+          <span class="arrow">▶</span>
+          v1.1.0 – <time datetime="2025-05-10">26 maggio 2025</time>
+          <span class="badge">✅ STABILE<O</span>
+        </div>
+        <div class="entry-body">
+          <ul>
+            <li>🚀 Prima pubblicazione homepage</li>
+            <li>🧠 Sezione Chi Sono e Competenze</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - Alessio aka Tempestosoh</p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    }
+
+    function toggleMenu() {
+      const nav = document.getElementById("mainNav");
+      nav.classList.toggle("show");
+    }
+
+    function toggleEntry(el) {
+      const entry = el.closest('.changelog-entry');
+      entry.classList.toggle('collapsed');
+      const arrow = el.querySelector('.arrow');
+      arrow.textContent = entry.classList.contains('collapsed') ? '▶' : '▼';
+    }
+
+    window.onload = function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+      }
+    };
+  </script>
+</body>
+</html>
