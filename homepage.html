@@ -312,6 +312,43 @@
         margin: 5px 10px;
       }
     }
+    .hamburger {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    margin-left: auto;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  nav a, nav button.toggle-btn {
+    margin: 10px 0;
+  }
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+  }
+}
   </style>
 </head>
 <body>
@@ -322,15 +359,17 @@
 
   <div class="bg-animation"></div>
   <header>
-    <div class="logo">Tempestosoh</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#chi">Chi Sono</a>
-      <a href="#progetti">Progetti</a>
-      <a href="#contatti">Contatti</a>
-      <button class="toggle-btn" onclick="toggleTheme()">🌓</button>
-    </nav>
-  </header>
+  <div class="logo">Tempestosoh</div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button> 
+  <nav id="mainNav">
+    <a href="#">Home</a>
+    <a href="#chi">Chi Sono</a>
+    <a href="#progetti">Progetti</a>
+    <a href="#contatti">Contatti</a>
+    <button class="toggle-btn" onclick="toggleTheme()">🌓</button>
+  </nav>
+</header>
+
 
   <section class="hero">
     <div class="hero-text">
@@ -362,6 +401,12 @@
       <p>Una pagina dedicata alla preview web di un file html</p>
       <a href="https://tempestosoh.github.io/portfolio/htmlpreview.html" target="_blank" class="btn">Visita</a>
     </div>
+    <div class="card">
+  <h3>📁 Altri progetti</h3>
+  <p>Scopri tutti i progetti disponibili nel mio portfolio.</p>
+  <a href="progetti.html" class="btn">Mostra tutti</a>
+</div>
+
     <div class="card">
       <h3>🧠 Competenze</h3>
       <div class="skillbar html"><span>HTML - 100%</span></div>
@@ -493,6 +538,10 @@
       const loader = document.getElementById("loader");
       loader.classList.add("hidden");
     });
+    function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  nav.classList.toggle("show");
+}
   </script>
 </body>
 </html>
