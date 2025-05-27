@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback - Tempestosoh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --text: #fff;
+      --secondary: #ccc;
+      --card: #1a1a1a;
+      --border: #222;
+      --primary: red;
+      --shadow: rgba(255, 0, 0, 0.2);
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+    }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+    }
+    .section {
+      padding: 60px 30px;
+    }
+    .card {
+      background: var(--card);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px var(--shadow);
+      max-width: 600px;
+      margin: auto;
+    }
+    .card h2 {
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    textarea, input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    footer {
+      background: var(--bg);
+      text-align: center;
+      padding: 30px;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      .card {
+        padding: 20px;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Tempestosoh</div>
+    <nav>
+      <a href="homepage.html">Home</a>
+      <a href="progetti.html">Progetti</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <div class="card">
+      <h2>Lascia il tuo feedback</h2>
+      <form action="https://formsubmit.co/alessiod2010vr@gmail.com" method="POST">
+        <!-- Configurazioni nascoste -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        
+
+        <label for="email">La tua email (opzionale):</label>
+        <input type="email" id="email" name="email">
+
+        <label for="rating">Valutazione del sito (1-5):</label>
+        <select name="rating" id="rating" required>
+          <option value="">Seleziona</option>
+          <option value="1">★☆☆☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="4">★★★★☆</option>
+          <option value="5">★★★★★</option>
+        </select>
+
+        <label for="message">Consigli, problemi o suggerimenti:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="btn">Invia Feedback</button>
+      <div id="thankyou" style="display:none; margin-top: 20px; text-align: center;">
+  <h3>✅ Grazie per il feedback!</h3>
+  <p>Ti stiamo reindirizzando alla homepage...</p>
+</div>
+</form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - Alessio aka Tempestosoh</p>
+  </footer>
+<script>
+  // Blocco doppio invio in un mese
+  const lastVote = localStorage.getItem("lastFeedback");
+  const now = new Date();
+  const form = document.querySelector("form");
+  const thankyou = document.getElementById("thankyou");
+
+  if (lastVote) {
+    const lastDate = new Date(lastVote);
+    const diffDays = Math.floor((now - lastDate) / (1000 * 60 * 60 * 24));
+    if (diffDays < 30) {
+      form.innerHTML = '<p style="color: var(--primary); text-align: center;">⏳ Hai già votato questo mese.<br>Riprova tra ' + (30 - diffDays) + ' giorni.</p>';
+    }
+  }
+  const form = document.querySelector("form");
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    localStorage.setItem("lastFeedback", new Date().toISOString());
+    form.style.display = "none";
+    thankyou.style.display = "block";
+    setTimeout(() => {
+      window.location.href = "https://tempestosoh.github.io/portfolio/homepage.html";
+    }, 4000);
+  });
