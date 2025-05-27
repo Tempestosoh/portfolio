@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feedback - Tempestosoh</title>
+  <title>Feedback</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -146,10 +146,9 @@
   <section class="section">
     <div class="card">
       <h2>Lascia il tuo feedback</h2>
-      <form action="https://formsubmit.co/alessiod2010vr@gmail.com" method="POST">
+      <form id="feedbackForm">
         <!-- Configurazioni nascoste -->
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
+        
         
 
         <label for="email">La tua email (opzionale):</label>
@@ -195,7 +194,7 @@
   // Blocco doppio invio in un mese
   const lastVote = localStorage.getItem("lastFeedback");
   const now = new Date();
-  const form = document.querySelector("form");
+  const form = document.getElementById("feedbackForm");
   const thankyou = document.getElementById("thankyou");
 
   if (lastVote) {
