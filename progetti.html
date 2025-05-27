@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soon | Tempestosoh</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --card: #f9f9f9;
+      --border: #cccccc;
+      --alert: #ff2e2e;
+      --alert-bg: #ffeaea;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d0d;
+        --text: #ffffff;
+        --card: #1a1a1a;
+        --border: #333333;
+        --alert: #ff2e2e;
+        --alert-bg: #3b0000;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .warning-box {
+      background-color: var(--card);
+      border-left: 6px solid var(--alert);
+      padding: 30px;
+      max-width: 600px;
+      width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .warning-box h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--alert);
+    }
+
+    .warning-box p {
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .back-link {
+      margin-top: 30px;
+      display: inline-block;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+      background-color: var(--alert-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="warning-box">
+    <h1>⚠️ Pagina in via di sviluppo</h1>
+    <p>Al momento non ci sono versioni stabili o beta attive di questa pagina.<br>Resta aggiornato controllando questa pagina o seguendo i miei canali per scoprire quando verrà inaugurata!</p>
+  </div>
+
+  <a class="back-link" href="https://tempestosoh.github.io/portfolio/homepage.html">🔙 Torna alla homepage</a>
+
+</body>
+</html>
