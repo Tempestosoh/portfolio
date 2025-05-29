@@ -1,4 +1,4 @@
-# 💼 Tempestosoh - Portfolio Personale
+# 💼 Tempestosoh - Portfolio Personale Ufficiale
 
 ![Status](https://img.shields.io/badge/status-attivo-red?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
