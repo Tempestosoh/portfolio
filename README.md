@@ -104,4 +104,4 @@ Se hai idee, suggerimenti o vuoi contribuire:
   <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=Tempestosoh&button_colour=FF5F5F&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00"
        style="height: 30px;" alt="Buy Me a Coffee" />
 </a>
-Grazie per il supporto! ❤️
+- Grazie per il supporto! ❤️
