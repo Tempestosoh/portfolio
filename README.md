@@ -97,8 +97,4 @@ Se hai idee, suggerimenti o vuoi contribuire:
 - manda una pull request
 - o scrivimi privatamente
 
----
-
-## ❤️ Donazione
-- Puoi fare una donazione **volontaria** cliccando il pulsante: In aggiornamento
 - Grazie per il supporto! ❤️
