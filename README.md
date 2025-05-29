@@ -89,7 +89,7 @@ Libero uso per fini personali o educativi. Citami se lo usi pubblicamente.
 ## ⭐ Contribuisci
 
 Se hai idee, suggerimenti o vuoi contribuire:
-- apri una issue via il form contatti ([clicca qui per il form](https://tempestosoh.github.io/portfolio/homepage.html#contatti)
+- apri una issue via il form contatti ([clicca qui per il form](https://tempestosoh.github.io/portfolio/homepage.html#contatti))
 - manda una pull request
 - o scrivimi privatamente
 
