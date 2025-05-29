@@ -96,5 +96,7 @@ Se hai idee, suggerimenti o vuoi contribuire:
 - apri una issue via il form contatti ([clicca qui per il form](https://tempestosoh.github.io/portfolio/homepage.html#contatti))
 - manda una pull request
 - o scrivimi privatamente
+- Puoi fare una donazione **volontaria** cliccando il pulsante sottostante:
+<a href="https://www.buymeacoffee.com/Tempestosoh"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=Tempestosoh&button_colour=FF5F5F&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" /></a>
 
 Grazie per il supporto! ❤️
