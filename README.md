@@ -3,6 +3,10 @@
 ![Status](https://img.shields.io/badge/status-attivo-red?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 ![Made by](https://img.shields.io/badge/made%20by-Tempestosoh-red?style=flat-square)
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26?logo=html5&logoColor=white&style=flat-square)
+![CSS3](https://img.shields.io/badge/CSS3-%231572B6?logo=css3&logoColor=white&style=flat-square)
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E?logo=javascript&logoColor=black&style=flat-square)
+
 
 Benvenuto nel mio **portfolio personale**, un sito interattivo dove raccolgo i miei progetti di sviluppo, esperimenti web e strumenti utili per sviluppatori.  
 Il tutto progettato con uno stile tecnico, dark mode supportata, e pienamente responsive.
