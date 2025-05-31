@@ -88,7 +88,7 @@ Libero uso per fini personali o educativi. Citami se lo usi pubblicamente.
 - GitHub: [@Tempestosoh](https://github.com/Tempestosoh)
 - Form di contatto: disponibile su homepage
 - Dm di discord: [@Tempestosoh](https://discord.com/users/1124418562761695253)
-- Tempestosoh DEV server discord: [@Tempestosoh](https://discord.gg/fU2NTKrFWe)
+- Tempestosoh DEV server discord: [Clicca qui per entrare](https://discord.gg/fU2NTKrFWe)
 ---
 
 ## ⭐ Contribuisci
