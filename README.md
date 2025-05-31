@@ -34,7 +34,7 @@ Il tutto progettato con uno stile tecnico, dark mode supportata, e pienamente re
   - Controllo forza
   - QR code
   - Esportazione PNG
-  - 
+  - Consigli per migliorarla
 - 🧪 Modalità **Studio/Pomodoro** In fase di sviluppo
   - Timer personalizzabile
   - Suoni ambientali
@@ -55,6 +55,7 @@ Il tutto progettato con uno stile tecnico, dark mode supportata, e pienamente re
 ├── tools/
 ├── password.html
 ├── studio.html
+├── htmlpreview.html
 └── assets/
 └── immagini, loghi, icone
 
