@@ -18,7 +18,7 @@ Il tutto progettato con uno stile tecnico, dark mode supportata, e pienamente re
 - **Nome:** Alessio (aka **Tempestosoh**)  
 - **Paese:** Italia  
 - **Scuola:** ITIS indirizzo informatico  
-- **Interessi:** sviluppo web, automazione, interfacce nerd
+- **Interessi:** sviluppo web, automazione, videogiochi, sviluppo software
 
 ---
 
