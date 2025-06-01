@@ -100,3 +100,6 @@ Se hai idee, suggerimenti o vuoi contribuire:
 - o scrivimi privatamente
 
 - Grazie per il supporto! ❤️
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://tempestosoh.github.io/portfolio/homepage.html&count_bg=%238B5CF6&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visite&edge_flat=false)](https://hits.seeyoufarm.com)
+
