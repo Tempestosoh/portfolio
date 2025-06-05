@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manutenzione - Tempestosoh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    /* ===== Root variables for dark & light themes ===== */
     :root {
       --bg: #0d0d0d;
       --text: #fff;
       --secondary: #ccc;
       --card: #1a1a1a;
       --border: #222;
-      --primary: red;
+      --primary: #ff0000;
       --shadow: rgba(255, 0, 0, 0.2);
     }
 
@@ -27,22 +28,30 @@
       --shadow: rgba(255, 0, 0, 0.2);
     }
 
+    /* ===== Global styles ===== */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      transition: background-color 0.3s ease, color 0.3s ease;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
+    /* ===== Background animation container ===== */
     .bg-animation {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
       pointer-events: none;
     }
@@ -52,12 +61,13 @@
       height: 100%;
     }
 
+    /* ===== Header ===== */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 30px;
-      background: var(--bg);
+      background-color: var(--bg);
       border-bottom: 2px solid var(--border);
     }
 
@@ -71,12 +81,15 @@
       width: 40px;
       height: 40px;
       border-radius: 8px;
+      object-fit: cover;
     }
 
     .logo span {
       font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
       font-size: 1.4rem;
       color: var(--text);
+      user-select: none;
     }
 
     .button-group {
@@ -85,21 +98,29 @@
     }
 
     .toggle-btn {
-      background: var(--primary);
-      color: white;
+      background-color: var(--primary);
+      color: #fff;
       border: none;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 700;
       font-family: 'Poppins', sans-serif;
-      transition: background 0.3s;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
     }
 
-    .toggle-btn:hover {
-      background: #b30000;
+    .toggle-btn:hover,
+    .toggle-btn:focus {
+      background-color: #b30000;
+      outline: none;
     }
 
+    /* ===== Main content ===== */
     main {
       flex: 1;
       display: flex;
@@ -108,42 +129,58 @@
       align-items: center;
       text-align: center;
       padding: 60px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+      user-select: none;
     }
 
     h1 span {
       color: var(--primary);
       cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    h1 span:hover,
+    h1 span:focus {
+      color: #ff3333;
+      outline: none;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--secondary);
       max-width: 600px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      line-height: 1.6;
     }
 
     .timer {
-      font-size: 2rem;
-      font-weight: bold;
+      font-size: 2.4rem;
+      font-weight: 700;
       color: var(--primary);
-      background: var(--card);
-      padding: 15px 30px;
+      background-color: var(--card);
+      padding: 18px 40px;
       border-radius: 12px;
       box-shadow: 0 0 20px var(--shadow);
+      user-select: none;
+      min-width: 260px;
     }
 
+    /* ===== Easter egg popup ===== */
     .easter-egg {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--card);
+      background-color: var(--card);
       color: var(--text);
-      padding: 15px 20px 10px;
+      padding: 20px 25px 15px;
       border: 2px solid var(--primary);
       border-radius: 12px;
       box-shadow: 0 0 20px var(--shadow);
@@ -151,47 +188,100 @@
       display: none;
       text-align: center;
       z-index: 100;
+      max-width: 280px;
+      user-select: none;
     }
 
     .easter-egg img {
       display: block;
-      margin: 0 auto 10px;
+      margin: 0 auto 12px;
       max-width: 200px;
       border-radius: 12px;
+      user-select: none;
     }
 
     .close-btn {
       position: absolute;
-      top: 5px;
+      top: 6px;
       right: 10px;
       background: transparent;
       border: none;
       color: var(--primary);
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 700;
+      user-select: none;
     }
 
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #ff3333;
+      outline: none;
+    }
+
+    /* ===== Footer ===== */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 20px 15px;
       color: var(--secondary);
       font-size: 0.9rem;
       border-top: 1px solid var(--border);
+      user-select: none;
+    }
+
+    /* ===== Responsive styles ===== */
+    @media (max-width: 900px) {
+      main {
+        padding: 50px 15px;
+      }
     }
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+        margin-bottom: 16px;
+      }
+
+      p {
+        font-size: 1.1rem;
+        max-width: 90%;
+        margin-bottom: 30px;
       }
 
       .timer {
-        font-size: 1.5rem;
-        padding: 10px 20px;
+        font-size: 1.8rem;
+        padding: 14px 28px;
+        min-width: 200px;
+      }
+
+      header {
+        padding: 15px 20px;
+      }
+
+      .logo img {
+        width: 35px;
+        height: 35px;
       }
 
       .logo span {
         font-size: 1.2rem;
+      }
+
+      .toggle-btn {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
+
+      .easter-egg {
+        max-width: 90vw;
+        bottom: 15px;
+        right: 15px;
+        padding: 16px 20px 12px;
+        font-size: 0.9rem;
+      }
+
+      .easter-egg img {
+        max-width: 160px;
       }
     }
   </style>
@@ -202,20 +292,20 @@
   </div>
 
   <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo Tempestosoh">
+    <div class="logo" aria-label="Logo Tempestosoh">
+      <img src="logo.png" alt="Logo Tempestosoh" />
       <span>Tempestosoh</span>
     </div>
     <div class="button-group">
-      <button class="toggle-btn" onclick="toggleTheme()">🌓 Tema</button>
-      <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')">🚧 Beta</button>
+      <button class="toggle-btn" onclick="toggleTheme()" aria-label="Cambia tema">🌓 Tema</button>
+      <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')" aria-label="Apri beta">🚧 Beta</button>
     </div>
   </header>
 
   <main>
-    <h1>Sito in <span id="triggerEgg">Manutenzione</span></h1>
+    <h1>Sito in <span id="triggerEgg" tabindex="0" role="button" aria-pressed="false">Manutenzione</span></h1>
     <p>Stiamo lavorando per migliorare la tua esperienza. Torneremo online al più presto! ⏳</p>
-    <div class="timer" id="countdown">Caricamento timer...</div>
+    <div class="timer" id="countdown" aria-live="polite" aria-atomic="true">Caricamento timer...</div>
   </main>
 
   <footer>
@@ -223,9 +313,9 @@
   </footer>
 
   <!-- Easter Egg -->
-  <div class="easter-egg" id="easterEgg">
-    <button class="close-btn" onclick="closeEasterEgg()">✖</button>
-    <img src="https://imgur.com/a/Gm6qtpV" alt="Signore al cantiere">
+  <div class="easter-egg" id="easterEgg" role="alert" aria-live="assertive" aria-hidden="true">
+    <button class="close-btn" onclick="closeEasterEgg()" aria-label="Chiudi messaggio">✖</button>
+    <img src="https://i.imgur.com/UOLj7bY.jpeg" alt="Signore al cantiere" />
     <p>“Lavori in corso eh... ci voleva proprio!”</p>
   </div>
 
@@ -233,11 +323,12 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <script>
+    // Theme toggle
     function toggleTheme() {
       document.body.classList.toggle('light');
     }
 
-    // Countdown
+    // Countdown timer
     const targetDate = new Date("2025-06-07T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
@@ -246,7 +337,8 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.innerHTML = "🚀 Siamo tornati online!";
+        countdownEl.textContent = "🚀 Siamo tornati online!";
+        clearInterval(intervalId);
         return;
       }
 
@@ -255,58 +347,70 @@
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      countdownEl.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+      countdownEl.textContent = `${days}g ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    setInterval(updateCountdown, 1000);
+    const intervalId = setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Easter Egg Logic
+    // Easter egg logic
     let clickCount = 0;
     const trigger = document.getElementById("triggerEgg");
     const egg = document.getElementById("easterEgg");
 
     function closeEasterEgg() {
       egg.style.display = "none";
+      egg.setAttribute('aria-hidden', 'true');
     }
 
     trigger.addEventListener("click", () => {
       clickCount++;
       if (clickCount === 4) {
         egg.style.display = "block";
+        egg.setAttribute('aria-hidden', 'false');
         setTimeout(() => {
           egg.style.display = "none";
-        }, 5000); // Chiude automaticamente dopo 5 secondi
+          egg.setAttribute('aria-hidden', 'true');
+          clickCount = 0;
+        }, 5000);
+      }
+    });
+
+    // Accessibility: allow keyboard activation of easter egg
+    trigger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        trigger.click();
       }
     });
 
     // Particles.js config
     particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ff0000" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.2, "random": true },
-        "size": { "value": 3, "random": true },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ff0000",
-          "opacity": 0.2,
-          "width": 1
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#ff0000" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ff0000",
+          opacity: 0.2,
+          width: 1
         },
-        "move": { "enable": true, "speed": 1.5 }
+        move: { enable: true, speed: 1.5 }
       },
-      "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": false }
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: false }
         },
-        "modes": {
-          "repulse": { "distance": 100 }
+        modes: {
+          repulse: { distance: 100 }
         }
       },
-      "retina_detect": true
+      retina_detect: true
     });
   </script>
 </body>
