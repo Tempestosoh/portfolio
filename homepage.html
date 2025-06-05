@@ -7,14 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ===== Root variables for dark & light themes ===== */
     :root {
       --bg: #0d0d0d;
       --text: #fff;
       --secondary: #ccc;
       --card: #1a1a1a;
       --border: #222;
-      --primary: #ff0000;
+      --primary: red;
       --shadow: rgba(255, 0, 0, 0.2);
     }
 
@@ -28,24 +27,18 @@
       --shadow: rgba(255, 0, 0, 0.2);
     }
 
-    /* ===== Global styles ===== */
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background 0.3s, color 0.3s;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ===== Background animation container ===== */
     .bg-animation {
       position: fixed;
       top: 0;
@@ -61,14 +54,15 @@
       height: 100%;
     }
 
-    /* ===== Header ===== */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 30px;
-      background-color: var(--bg);
+      background: var(--bg);
       border-bottom: 2px solid var(--border);
+      position: relative;
+      z-index: 10;
     }
 
     .logo {
@@ -81,46 +75,85 @@
       width: 40px;
       height: 40px;
       border-radius: 8px;
-      object-fit: cover;
     }
 
     .logo span {
       font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
       font-size: 1.4rem;
       color: var(--text);
-      user-select: none;
     }
 
+    /* Pulsanti desktop */
     .button-group {
       display: flex;
       gap: 12px;
     }
 
     .toggle-btn {
-      background-color: var(--primary);
-      color: #fff;
+      background: var(--primary);
+      color: white;
       border: none;
-      padding: 10px 18px;
+      padding: 8px 16px;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: bold;
       font-family: 'Poppins', sans-serif;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      transition: background 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: #b30000;
+    }
+
+    /* Hamburger menu button */
+    .hamburger {
+      display: none;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.8rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Menu nascosto per mobile */
+    .menu {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 1rem;
+      gap: 12px;
     }
 
-    .toggle-btn:hover,
-    .toggle-btn:focus {
-      background-color: #b30000;
-      outline: none;
+    /* Mobile styles */
+    @media (max-width: 700px) {
+      .button-group {
+        display: none; /* Nascondi i pulsanti desktop */
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        position: fixed;
+        top: 60px; /* sotto header */
+        right: 20px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 0 20px var(--shadow);
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        display: none;
+        z-index: 1000;
+        width: 150px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
     }
 
-    /* ===== Main content ===== */
     main {
       flex: 1;
       display: flex;
@@ -129,58 +162,42 @@
       align-items: center;
       text-align: center;
       padding: 60px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
     }
 
     h1 {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       margin-bottom: 20px;
-      font-weight: 900;
-      line-height: 1.2;
-      user-select: none;
     }
 
     h1 span {
       color: var(--primary);
       cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    h1 span:hover,
-    h1 span:focus {
-      color: #ff3333;
-      outline: none;
     }
 
     p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--secondary);
       max-width: 600px;
-      margin-bottom: 40px;
-      line-height: 1.6;
+      margin-bottom: 30px;
     }
 
     .timer {
-      font-size: 2.4rem;
-      font-weight: 700;
+      font-size: 2rem;
+      font-weight: bold;
       color: var(--primary);
-      background-color: var(--card);
-      padding: 18px 40px;
+      background: var(--card);
+      padding: 15px 30px;
       border-radius: 12px;
       box-shadow: 0 0 20px var(--shadow);
-      user-select: none;
-      min-width: 260px;
     }
 
-    /* ===== Easter egg popup ===== */
     .easter-egg {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: var(--card);
+      background: var(--card);
       color: var(--text);
-      padding: 20px 25px 15px;
+      padding: 15px 20px 10px;
       border: 2px solid var(--primary);
       border-radius: 12px;
       box-shadow: 0 0 20px var(--shadow);
@@ -188,100 +205,47 @@
       display: none;
       text-align: center;
       z-index: 100;
-      max-width: 280px;
-      user-select: none;
     }
 
     .easter-egg img {
       display: block;
-      margin: 0 auto 12px;
+      margin: 0 auto 10px;
       max-width: 200px;
       border-radius: 12px;
-      user-select: none;
     }
 
     .close-btn {
       position: absolute;
-      top: 6px;
+      top: 5px;
       right: 10px;
       background: transparent;
       border: none;
       color: var(--primary);
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       cursor: pointer;
-      font-weight: 700;
-      user-select: none;
+      font-weight: bold;
     }
 
-    .close-btn:hover,
-    .close-btn:focus {
-      color: #ff3333;
-      outline: none;
-    }
-
-    /* ===== Footer ===== */
     footer {
       text-align: center;
-      padding: 20px 15px;
+      padding: 20px;
       color: var(--secondary);
       font-size: 0.9rem;
       border-top: 1px solid var(--border);
-      user-select: none;
-    }
-
-    /* ===== Responsive styles ===== */
-    @media (max-width: 900px) {
-      main {
-        padding: 50px 15px;
-      }
     }
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 2.2rem;
-        margin-bottom: 16px;
-      }
-
-      p {
-        font-size: 1.1rem;
-        max-width: 90%;
-        margin-bottom: 30px;
+        font-size: 2rem;
       }
 
       .timer {
-        font-size: 1.8rem;
-        padding: 14px 28px;
-        min-width: 200px;
-      }
-
-      header {
-        padding: 15px 20px;
-      }
-
-      .logo img {
-        width: 35px;
-        height: 35px;
+        font-size: 1.5rem;
+        padding: 10px 20px;
       }
 
       .logo span {
         font-size: 1.2rem;
-      }
-
-      .toggle-btn {
-        padding: 8px 14px;
-        font-size: 0.9rem;
-      }
-
-      .easter-egg {
-        max-width: 90vw;
-        bottom: 15px;
-        right: 15px;
-        padding: 16px 20px 12px;
-        font-size: 0.9rem;
-      }
-
-      .easter-egg img {
-        max-width: 160px;
       }
     }
   </style>
@@ -292,20 +256,23 @@
   </div>
 
   <header>
-    <div class="logo" aria-label="Logo Tempestosoh">
+    <div class="logo">
       <img src="logo.png" alt="Logo Tempestosoh" />
       <span>Tempestosoh</span>
     </div>
-    <div class="button-group">
-      <button class="toggle-btn" onclick="toggleTheme()" aria-label="Cambia tema">🌓 Tema</button>
-      <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')" aria-label="Apri beta">🚧 Beta</button>
-    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+
+    <nav class="menu" id="menu">
+      <button class="toggle-btn" onclick="toggleTheme()">🌓 Tema</button>
+      <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')">🚧 Beta</button>
+    </nav>
   </header>
 
   <main>
-    <h1>Sito in <span id="triggerEgg" tabindex="0" role="button" aria-pressed="false">Manutenzione</span></h1>
+    <h1>Sito in <span id="triggerEgg">Manutenzione</span></h1>
     <p>Stiamo lavorando per migliorare la tua esperienza. Torneremo online al più presto! ⏳</p>
-    <div class="timer" id="countdown" aria-live="polite" aria-atomic="true">Caricamento timer...</div>
+    <div class="timer" id="countdown">Caricamento timer...</div>
   </main>
 
   <footer>
@@ -313,8 +280,8 @@
   </footer>
 
   <!-- Easter Egg -->
-  <div class="easter-egg" id="easterEgg" role="alert" aria-live="assertive" aria-hidden="true">
-    <button class="close-btn" onclick="closeEasterEgg()" aria-label="Chiudi messaggio">✖</button>
+  <div class="easter-egg" id="easterEgg">
+    <button class="close-btn" onclick="closeEasterEgg()">✖</button>
     <img src="https://i.imgur.com/UOLj7bY.jpeg" alt="Signore al cantiere" />
     <p>“Lavori in corso eh... ci voleva proprio!”</p>
   </div>
@@ -323,12 +290,11 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <script>
-    // Theme toggle
     function toggleTheme() {
       document.body.classList.toggle('light');
     }
 
-    // Countdown timer
+    // Countdown
     const targetDate = new Date("2025-06-07T00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
@@ -337,8 +303,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.textContent = "🚀 Siamo tornati online!";
-        clearInterval(intervalId);
+        countdownEl.innerHTML = "🚀 Siamo tornati online!";
         return;
       }
 
@@ -347,70 +312,66 @@
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      countdownEl.textContent = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+      countdownEl.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    const intervalId = setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Easter egg logic
+    // Easter Egg Logic
     let clickCount = 0;
     const trigger = document.getElementById("triggerEgg");
     const egg = document.getElementById("easterEgg");
 
     function closeEasterEgg() {
       egg.style.display = "none";
-      egg.setAttribute('aria-hidden', 'true');
     }
 
     trigger.addEventListener("click", () => {
       clickCount++;
       if (clickCount === 4) {
         egg.style.display = "block";
-        egg.setAttribute('aria-hidden', 'false');
         setTimeout(() => {
           egg.style.display = "none";
-          egg.setAttribute('aria-hidden', 'true');
-          clickCount = 0;
         }, 5000);
       }
     });
 
-    // Accessibility: allow keyboard activation of easter egg
-    trigger.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        trigger.click();
-      }
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const menu = document.getElementById('menu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      menu.classList.toggle('active');
     });
 
     // Particles.js config
     particlesJS("particles-js", {
-      particles: {
-        number: { value: 60, density: { enable: true, value_area: 800 } },
-        color: { value: "#ff0000" },
-        shape: { type: "circle" },
-        opacity: { value: 0.2, random: true },
-        size: { value: 3, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ff0000",
-          opacity: 0.2,
-          width: 1
+      "particles": {
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ff0000" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.2, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ff0000",
+          "opacity": 0.2,
+          "width": 1
         },
-        move: { enable: true, speed: 1.5 }
+        "move": { "enable": true, "speed": 1.5 }
       },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: false }
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": false }
         },
-        modes: {
-          repulse: { distance: 100 }
+        "modes": {
+          "repulse": { "distance": 100 }
         }
       },
-      retina_detect: true
+      "retina_detect": true
     });
   </script>
 </body>
