@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manutenzione - Tempestosoh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --text: #fff;
+      --secondary: #ccc;
+      --card: #1a1a1a;
+      --border: #222;
+      --primary: red;
+      --shadow: rgba(255, 0, 0, 0.2);
+    }
+
+    body.light {
+      --bg: #f4f4f4;
+      --text: #000;
+      --secondary: #333;
+      --card: #fff;
+      --border: #ddd;
+      --primary: #e60000;
+      --shadow: rgba(255, 0, 0, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #particles-js {
+      width: 100%;
+      height: 100%;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .logo span {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    /* Pulsanti desktop */
+    .button-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .toggle-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: #b30000;
+    }
+
+    /* Hamburger menu button */
+    .hamburger {
+      display: none;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.8rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Menu nascosto per mobile */
+    .menu {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 700px) {
+      .button-group {
+        display: none; /* Nascondi i pulsanti desktop */
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        position: fixed;
+        top: 60px; /* sotto header */
+        right: 20px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 0 20px var(--shadow);
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        display: none;
+        z-index: 1000;
+        width: 150px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .timer {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+      background: var(--card);
+      padding: 15px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px var(--shadow);
+    }
+
+    .easter-egg {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--card);
+      color: var(--text);
+      padding: 15px 20px 10px;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      box-shadow: 0 0 20px var(--shadow);
+      font-size: 1rem;
+      display: none;
+      text-align: center;
+      z-index: 100;
+    }
+
+    .easter-egg img {
+      display: block;
+      margin: 0 auto 10px;
+      max-width: 200px;
+      border-radius: 12px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .timer {
+        font-size: 1.5rem;
+        padding: 10px 20px;
+      }
+
+      .logo span {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation">
+    <div id="particles-js"></div>
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo Tempestosoh" />
+      <span>Tempestosoh</span>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+
+    <nav class="menu" id="menu">
+      <button class="toggle-btn" onclick="toggleTheme()">🌓 Tema</button>
+      <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')">🚧 Beta</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Sito in <span id="triggerEgg">Manutenzione</span></h1>
+    <p>Stiamo lavorando per migliorare la tua esperienza. Torneremo online al più presto! ⏳</p>
+    <div class="timer" id="countdown">Caricamento timer...</div>
+  </main>
+
+  <footer>
+    &copy; 2025 - Tempestosoh. Tutti i diritti riservati.
+  </footer>
+
+  <!-- Easter Egg -->
+  <div class="easter-egg" id="easterEgg">
+    <button class="close-btn" onclick="closeEasterEgg()">✖</button>
+    <img src="https://i.imgur.com/UOLj7bY.jpeg" alt="Signore al cantiere" />
+    <p>“Lavori in corso eh... ci voleva proprio!”</p>
+  </div>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+
+    // Countdown
+    const targetDate = new Date("2025-06-07T00:18:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownEl.innerHTML = "🚀 Siamo tornati online, a momenti la homepage verrà ricaricata";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Easter Egg Logic
+    let clickCount = 0;
+    const trigger = document.getElementById("triggerEgg");
+    const egg = document.getElementById("easterEgg");
+
+    function closeEasterEgg() {
+      egg.style.display = "none";
+    }
+
+    trigger.addEventListener("click", () => {
+      clickCount++;
+      if (clickCount === 4) {
+        egg.style.display = "block";
+        setTimeout(() => {
+          egg.style.display = "none";
+        }, 5000);
+      }
+    });
+
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const menu = document.getElementById('menu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+
+    // Particles.js config
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ff0000" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.2, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ff0000",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 1.5 }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": false }
+        },
+        "modes": {
+          "repulse": { "distance": 100 }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>
