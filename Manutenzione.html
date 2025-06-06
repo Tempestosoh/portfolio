@@ -295,7 +295,7 @@
     }
 
     // Countdown
-    const targetDate = new Date("2025-06-07T00:18:00").getTime();
+    const targetDate = new Date("2025-06-07T17:59:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
     function updateCountdown() {
@@ -303,7 +303,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.innerHTML = "🚀 Siamo tornati online, a momenti la homepage verrà ricaricata";
+        countdownEl.innerHTML = "🚀 Al momento nessuna manutenzione è in corso";
         return;
       }
 
