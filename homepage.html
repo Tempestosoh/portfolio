@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manutenzione - Tempestosoh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tempestosoh - Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --bg: #0d0d0d;
       --text: #fff;
@@ -27,31 +28,62 @@
       --shadow: rgba(255, 0, 0, 0.2);
     }
 
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Poppins', sans-serif;
       background: var(--bg);
       color: var(--text);
-      transition: background 0.3s, color 0.3s;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
     .bg-animation {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://cdn.jsdelivr.net/gh/JulianLaval/canvas-particle-network/particle-network-animation.gif');
+      background-size: cover;
       z-index: -1;
+      opacity: 0.05;
       pointer-events: none;
     }
 
-    #particles-js {
-      width: 100%;
-      height: 100%;
+    /* Loader Styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid var(--card);
+      border-top: 6px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     header {
@@ -61,318 +93,594 @@
       padding: 20px 30px;
       background: var(--bg);
       border-bottom: 2px solid var(--border);
-      position: relative;
-      z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo img {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-    }
-
-    .logo span {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: var(--text);
+      flex-shrink: 0;
+      min-width: 120px;
     }
 
-    /* Pulsanti desktop */
-    .button-group {
+    nav {
       display: flex;
-      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      bottom: -5px;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
     .toggle-btn {
+      margin-left: 20px;
+      padding: 6px 14px;
       background: var(--primary);
       color: white;
       border: none;
-      padding: 8px 16px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      font-family: 'Poppins', sans-serif;
-      transition: background 0.3s;
     }
 
-    .toggle-btn:hover {
-      background: #b30000;
-    }
-
-    /* Hamburger menu button */
-    .hamburger {
-      display: none;
-      background: var(--primary);
-      color: white;
-      border: none;
-      font-size: 1.8rem;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    /* Menu nascosto per mobile */
-    .menu {
+    .hero {
       display: flex;
-      gap: 12px;
-    }
-
-    /* Mobile styles */
-    @media (max-width: 700px) {
-      .button-group {
-        display: none; /* Nascondi i pulsanti desktop */
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .menu {
-        position: fixed;
-        top: 60px; /* sotto header */
-        right: 20px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 0 20px var(--shadow);
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-        display: none;
-        z-index: 1000;
-        width: 150px;
-      }
-
-      .menu.active {
-        display: flex;
-      }
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex-wrap: wrap;
       align-items: center;
-      text-align: center;
-      padding: 60px 20px;
+      justify-content: space-between;
+      padding: 100px 30px;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    h1 span {
-      color: var(--primary);
-      cursor: pointer;
-    }
-
-    p {
-      font-size: 1.2rem;
-      color: var(--secondary);
+    .hero-text {
       max-width: 600px;
-      margin-bottom: 30px;
+      flex: 1 1 300px;
     }
 
-    .timer {
-      font-size: 2rem;
-      font-weight: bold;
+    .hero-text h1 {
+      font-size: 2.8rem;
+    }
+
+    .hero-text h1 span {
       color: var(--primary);
-      background: var(--card);
-      padding: 15px 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px var(--shadow);
     }
 
-    .easter-egg {
+    .hero-text p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+      color: var(--secondary);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn.disabled {
+      background: #444;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .hero-img {
+      flex: 1 1 250px;
+      text-align: center;
+    }
+
+    .hero-img img {
+      max-width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px var(--shadow);
+      margin-top: 30px;
+    }
+
+    .section {
+      padding: 60px 30px;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      border-left: 5px solid var(--primary);
+      padding-left: 15px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px var(--shadow);
+    }
+
+    .card h3 {
+      color: var(--primary);
+    }
+
+    .card p {
+      color: var(--secondary);
+    }
+
+    .skillbar {
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .skillbar span {
+      display: block;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .html { background: linear-gradient(to right, var(--primary) 100%, #333 0%); }
+    .css { background: linear-gradient(to right, var(--primary) 100%, #333 0%); }
+    .python { background: linear-gradient(to right, var(--primary) 45%, #333 45%); }
+    .java { background: linear-gradient(to right, var(--primary) 20%, #333 20%); }
+
+    footer {
+      background: var(--bg);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    #toTopBtn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--card);
-      color: var(--text);
-      padding: 15px 20px 10px;
-      border: 2px solid var(--primary);
-      border-radius: 12px;
-      box-shadow: 0 0 20px var(--shadow);
-      font-size: 1rem;
-      display: none;
-      text-align: center;
-      z-index: 100;
-    }
-
-    .easter-egg img {
-      display: block;
-      margin: 0 auto 10px;
-      max-width: 200px;
-      border-radius: 12px;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      background: transparent;
+      background: var(--primary);
+      color: white;
       border: none;
-      color: var(--primary);
-      font-size: 1.2rem;
+      padding: 10px 15px;
+      border-radius: 50%;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 18px;
+      display: none;
+      z-index: 9999;
+      transition: background 0.3s;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: var(--secondary);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
+    #toTopBtn:hover {
+      background: darkred;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
       }
 
-      .timer {
-        font-size: 1.5rem;
-        padding: 10px 20px;
+      .hero-text {
+        max-width: 100%;
       }
 
-      .logo span {
-        font-size: 1.2rem;
+      .hero-img {
+        margin-top: 20px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      nav {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: start;
+        margin-top: 10px;
+      }
+
+      nav a {
+        margin: 5px 10px;
       }
     }
-  </style>
-</head>
+    .hamburger {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    margin-left: auto;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  nav a, nav button.toggle-btn {
+    margin: 10px 0;
+  }
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+  }
+}
+  
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    section.hero {
+      position: relative;
+      overflow: hidden;
+    }
+</style>
+<style>
+.typewriter-text {
+  font-family: 'Orbitron', monospace;
+  color: var(--primary);
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--primary);
+  width: 0;
+  animation: typing 4s steps(40, end) forwards, blink 0.8s infinite;
+  margin-top: 10px;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+</style><style>
+    body {
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    </style><style>
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+</style><style>
+#typewriter {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--text);
+  animation: blink 0.7s steps(1) infinite;
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--secondary);
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+</style></head>
 <body>
-  <div class="bg-animation">
-    <div id="particles-js"></div>
-  </div>
+<!-- Loader -->
+<div id="loader">
+<div class="spinner"></div>
+</div>
+<header>
+<div class="logo">Tempestosoh</div>
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+<nav id="mainNav">
+<a href="#">Home</a>
+<a href="#chi">Chi Sono</a>
+<a href="#progetti">Progetti</a>
+<a href="#contatti">Contatti</a>
+<a href="https://tempestosoh.github.io/portfolio/changelogs.html">Changelogs</a>
+<a href="https://discord.gg/fU2NTKrFWe" target="_blank">Discord</a>
+<button class="toggle-btn" onclick="toggleTheme()">🌓</button>
+</nav>
+</header>
+<section class="hero"><div id="particles-js"></div>
+<div class="hero-text">
+<h1>Hi, I'm <span>Tempestosoh</span><br/>Developer</h1>
+<p><span id="typewriter"></span></p>
+<a class="btn" href="#contatti">Contact</a>
+</div>
+<div class="hero-img">
+<img alt="Foto Profilo" src="logo.png"/>
+</div>
+</section>
+<section class="section" id="chi">
+<h2>Chi Sono</h2>
+<div class="card">
+<p>Mi chiamo Alessio, conosciuto online come <strong>Tempestosoh</strong>. Vivo nel nord Italia e frequento un ITIS indirizzo informatico. Questo è il mio sito personale dove raccolgo i miei progetti e le mie competenze nel mondo del coding.</p>
+</div>
+</section>
+<section class="section" id="progetti">
+<h2>Progetti</h2>
+<div class="card">
+<h3>🌍 Apocaliss</h3>
+<p>Un sito web per un bot discord</p>
+<a class="btn" href="https://tempestosoh.github.io/apocaliss/hpage.html" target="_blank">Visita</a>
+</div>
+<div class="card">
+<h3>🚨 HTML Preview</h3>
+<p>Una pagina dedicata alla preview web di un file html</p>
+<a class="btn" href="https://tempestosoh.github.io/portfolio/htmlpreview.html" target="_blank">Visita</a>
+</div>
+<div class="card">
+<h3>📁 Altri progetti</h3>
+<p>Scopri tutti i progetti disponibili nel mio portfolio.</p>
+<a class="btn" href="progetti.html">Mostra tutti</a>
+</div>
+<div class="card">
+<h3>🧠 Competenze</h3>
+<div class="skillbar html"><span>HTML - 100%</span></div>
+<div class="skillbar css"><span>CSS - 100%</span></div>
+<div class="skillbar python"><span>Python - 45%</span></div>
+<div class="skillbar java"><span>Java - 20%</span></div>
+</div>
+</section>
+<section class="section" id="contatti">
+<h2>Contatti e link utili</h2>
+<div class="card">
+<p>🌐 Discord (dm): <a href="https://discord.com/users/1124418562761695253" target="_blank">Discord DM</a></p>
+<p>🌐 Discord (server): <a href="https://discord.gg/fU2NTKrFWe">Tempestosoh DEV discord</a></p>
+<p>🌐 GitHub: <a href="https://github.com/Tempestosoh" target="_blank">github.com/Tempestosoh</a></p>
+<p>📚 GitBook: <a href="https://tempestosoh.gitbook.io/docs" target="_blank">tempestosoh.gitbook.io/docs</a></p>
+<p>🔗 Hosting (referral): <a href="https://billing.walehost.com/aff.php?aff=249" target="_blank">walehost.com</a></p>
+<p>🅱️ Beta page: <a href="https://tempestosoh.github.io/portfolio/home-beta.html" target="_blank">Portafolio beta page</a></p>
+<p>🆘 Feedback <a href="https://tempestosoh.github.io/portfolio/review.html" target="_blank">Feedback page</a></p>
+<hr style="margin: 30px 0; border-color: var(--border);"/>
+<h3 style="margin-bottom: 20px;">✉️ Scrivimi un messaggio</h3>
+<form action="https://formsubmit.co/tempestosoh@gmail.com" id="contactForm" method="POST" onsubmit="return validateCaptcha(event)">
+<!-- Formsubmit hidden inputs -->
+<input name="_captcha" type="hidden" value="false"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_autoresponse" type="hidden" value="Grazie per avermi scritto! Ti risponderò il prima possibile."/>
+<input name="_next" type="hidden" value="https://tempestosoh.github.io/portfolio/homepage.html"/>
+<!-- Nome -->
+<label for="name">Nome:</label><br/>
+<input id="name" name="name" required="" type="text"/><br/><br/>
+<!-- Email -->
+<label for="email">Email:</label><br/>
+<input id="email" name="email" required="" type="email"/><br/><br/>
+<!-- Messaggio -->
+<label for="message">Messaggio:</label><br/>
+<textarea id="message" name="message" required="" rows="5"></textarea><br/><br/>
+<!-- CAPTCHA -->
+<label for="captcha">Quanto fa <span id="num1"></span> + <span id="num2"></span>?</label><br/>
+<input id="captcha" required="" type="number"/><br/><br/>
+<!-- Pulsante -->
+<button class="btn" type="submit">Invia</button>
+</form>
+</div>
+</section>
+<script>
+  let n1, n2;
 
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo Tempestosoh" />
-      <span>Tempestosoh</span>
-    </div>
+  // Genera due numeri casuali all'apertura della pagina
+  function generateCaptcha() {
+    n1 = Math.floor(Math.random() * 9) + 1;
+    n2 = Math.floor(Math.random() * 9) + 1;
+    document.getElementById("num1").textContent = n1;
+    document.getElementById("num2").textContent = n2;
+  }
 
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+  // Valida il CAPTCHA prima dell'invio
+  function validateCaptcha(event) {
+    const userAnswer = parseInt(document.getElementById("captcha").value);
+    if (userAnswer !== n1 + n2) {
+      alert("❌ CAPTCHA errato. Riprova.");
+      event.preventDefault();
+      generateCaptcha(); // rigenera il captcha
+      return false;
+    }
+    alert("✅ Messaggio inviato correttamente! La pagina verrà ricaricata a momenti.");
+    return true;
+  }
 
-    <nav class="menu" id="menu">
-      <button class="toggle-btn" onclick="toggleTheme()">🌓 Tema</button>
-      <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')">🚧 Beta</button>
-    </nav>
-  </header>
-
-  <main>
-    <h1>Sito in <span id="triggerEgg">Manutenzione</span></h1>
-    <p>Stiamo lavorando per migliorare la tua esperienza. Torneremo online al più presto! ⏳</p>
-    <div class="timer" id="countdown">Caricamento timer...</div>
-  </main>
-
-  <footer>
-    &copy; 2025 - Tempestosoh. Tutti i diritti riservati.
-  </footer>
-
-  <!-- Easter Egg -->
-  <div class="easter-egg" id="easterEgg">
-    <button class="close-btn" onclick="closeEasterEgg()">✖</button>
-    <img src="https://i.imgur.com/UOLj7bY.jpeg" alt="Signore al cantiere" />
-    <p>“Lavori in corso eh... ci voleva proprio!”</p>
-  </div>
-
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-  <script>
+  // Avvia il CAPTCHA all’apertura
+  window.onload = generateCaptcha;
+</script>
+<style>
+  form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+  }
+</style>
+<footer>
+<p>© 2025 - Alessio aka Tempestosoh</p>
+</footer>
+<button id="toTopBtn" onclick="scrollToTop()">↑</button>
+<script>
+    // Dark/light mode toggle
     function toggleTheme() {
       document.body.classList.toggle('light');
     }
 
-    // Countdown
-    const targetDate = new Date("2025-06-07T00:18:00").getTime();
-    const countdownEl = document.getElementById("countdown");
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        countdownEl.innerHTML = "🚀 Siamo tornati online, a momenti la homepage verrà ricaricata";
-        return;
+    // Show scroll-to-top button
+    const toTopBtn = document.getElementById("toTopBtn");
+    window.onscroll = () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        toTopBtn.style.display = "block";
+      } else {
+        toTopBtn.style.display = "none";
       }
+    };
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      countdownEl.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // Easter Egg Logic
-    let clickCount = 0;
-    const trigger = document.getElementById("triggerEgg");
-    const egg = document.getElementById("easterEgg");
-
-    function closeEasterEgg() {
-      egg.style.display = "none";
-    }
-
-    trigger.addEventListener("click", () => {
-      clickCount++;
-      if (clickCount === 4) {
-        egg.style.display = "block";
-        setTimeout(() => {
-          egg.style.display = "none";
-        }, 5000);
-      }
+    // Loader hiding logic
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      loader.classList.add("hidden");
     });
-
-    // Hamburger menu toggle
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const menu = document.getElementById('menu');
-
-    hamburgerBtn.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
-
-    // Particles.js config
+    function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  nav.classList.toggle("show");
+}
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
     particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ff0000" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.2, "random": true },
-        "size": { "value": 3, "random": true },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ff0000",
-          "opacity": 0.2,
-          "width": 1
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#ff0000" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ff0000",
+          opacity: 0.2,
+          width: 1
         },
-        "move": { "enable": true, "speed": 1.5 }
-      },
-      "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": false }
-        },
-        "modes": {
-          "repulse": { "distance": 100 }
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          out_mode: "out"
         }
       },
-      "retina_detect": true
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
     });
   </script>
-</body>
+<script>
+// Easter Egg in console
+console.log("%c🎉 Complimenti! Hai trovato l'easter egg!\nApri un ticket su Discord per ricevere il tuo premio! 🚀", "color: red; font-size: 16px; font-weight: bold;");
+</script><script>
+// Smooth scroll for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const section = document.querySelector(this.getAttribute('href'));
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// Scroll reveal animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal-visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section .card, .section h2').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+</script><script>
+const typewriter = document.getElementById("typewriter");
+const messages = [
+  "👾 Coding the Future with Style",
+  "🤖 Discord bot developer",
+  "🇮🇹 Italian student",
+  "🔗 Web developer"
+];
+let messageIndex = 0;
+let charIndex = 0;
+let typing = true;
+
+function typeEffect() {
+  if (typing) {
+    if (charIndex < messages[messageIndex].length) {
+      typewriter.textContent += messages[messageIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeEffect, 70);
+    } else {
+      typing = false;
+      setTimeout(typeEffect, 1500);
+    }
+  } else {
+    if (charIndex > 0) {
+      typewriter.textContent = messages[messageIndex].substring(0, charIndex - 1);
+      charIndex--;
+      setTimeout(typeEffect, 40);
+    } else {
+      typing = true;
+      messageIndex = (messageIndex + 1) % messages.length;
+      setTimeout(typeEffect, 200);
+    }
+  }
+}
+
+typeEffect();
+</script></body>
 </html>
