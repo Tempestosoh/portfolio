@@ -73,7 +73,7 @@ Il tutto progettato con uno stile tecnico, dark mode supportata, e pienamente re
 
 ## 🌍 Demo online
 
-➡️ [https://tempestosoh.github.io/portfolio/homepage.html](https://tempestosoh.github.io/portfolio/homepage.html)
+➡️ [https://tinyurl.com/tempe-portfolio](https://tinyurl.com/tempe-portfolio)
 
 ---
 
