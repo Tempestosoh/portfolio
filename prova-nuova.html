@@ -167,13 +167,13 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                background: rgba(0, 0, 0, 0.98) !important; /* Sfondo scuro per overlay, opacità aumentata */
+                background: rgba(0, 0, 0, 0.98); /* Sfondo scuro per overlay */
                 backdrop-filter: blur(12px);
                 padding: 0;
                 box-shadow: 0 6px 30px rgba(0,0,0,0.8);
-                transition: transform 0.4s ease-out; /* Transizione leggermente più lunga */
+                transition: transform 0.4s ease-out;
                 transform: translateX(100%); /* Nascosto a destra */
-                z-index: 99 !important; /* Sotto l'hamburger ma sopra il resto */
+                z-index: 99; /* Sotto l'hamburger ma sopra il resto */
             }
 
             .nav-links.nav-active {
@@ -181,12 +181,12 @@
             }
 
             .nav-links a {
-                margin: 1.5rem 0; /* Più spazio tra i link */
+                margin: 1.2rem 0;
                 text-align: center;
-                font-size: 1.8rem !important; /* Aumentato dimensione per mobile */
+                font-size: 1.6rem; /* Aumentato dimensione per mobile */
                 padding: 0.8rem 0;
-                color: var(--text-light) !important; /* Colore per assicurare visibilità */
-                text-shadow: 0 0 15px var(--primary-accent); /* Ombra del testo più pronunciata */
+                color: var(--text-light); /* Colore per assicurare visibilità */
+                text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
             }
             .nav-links a::after {
                 height: 4px;
@@ -194,7 +194,7 @@
             }
 
             .hamburger {
-                z-index: 100 !important; /* Assicura che l'icona dell'hamburger sia sempre sopra l'overlay */
+                z-index: 102; /* Ensure hamburger is above the overlay */
                 display: flex;
             }
             
@@ -202,6 +202,28 @@
             body.no-scroll {
                 overflow: hidden;
             }
+
+            /* Ensure header content is not visible behind the menu */
+            header {
+                position: relative; /* Ensure it respects z-index */
+            }
+        }
+
+        /* Additional fix for general content visibility behind the menu */
+        body.no-scroll > *:not(nav):not(#preloader) {
+            filter: blur(5px); /* Optional: blur background content when menu is open */
+            pointer-events: none; /* Disable interaction with background content */
+        }
+        body.no-scroll header {
+            visibility: hidden; /* Hide header content explicitly */
+        }
+
+        /* Override specific z-index for hamburger to be always on top */
+        .hamburger {
+            z-index: 1000 !important; /* Make sure it's the highest */
+        }
+        .nav-links {
+            z-index: 999 !important; /* Make sure menu is just below hamburger */
         }
 
         /* --- Header / Hero Section --- */
