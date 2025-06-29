@@ -903,10 +903,41 @@
 
 @media(max-width: 768px) {
     .nav-links {
-        background-color: rgba(0, 0, 0, 0.98) !important;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.9) !important;
-        backdrop-filter: blur(14px) !important;
-        border-left: 1px solid var(--border-color) !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        height: 100% !important;
+        width: 80% !important;
+        max-width: 320px;
+        background-color: #000 !important;
+        transform: translateX(100%) !important;
+        transition: transform 0.35s ease-in-out;
+        z-index: 998 !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 1rem;
+        box-shadow: -4px 0 10px rgba(0,0,0,0.7);
+        overflow-y: auto;
+    }
+
+    .nav-links.nav-active {
+        transform: translateX(0%) !important;
+    }
+
+    .nav-links a {
+        font-size: 1.4rem !important;
+        margin: 1rem 0;
+        color: white !important;
+        text-shadow: none !important;
+    }
+
+    .hamburger {
+        z-index: 999 !important;
+    }
+
+    body.no-scroll {
+        overflow: hidden !important;
     }
 }
 </style>
