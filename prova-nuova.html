@@ -1,19 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="assets/images/profile.jpg" rel="icon" type="image/png"/> 
-    <title>Il Mio Nome - Portfolio Professionale</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Oxanium:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="assets/images/profile.jpg" rel="icon" type="image/png"/>
+<title>[Il Tuo Nome] - Portfolio Professionale</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&amp;family=Oxanium:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<style>
         :root {
             --bg-dark: #0a0a0a; /* Nero profondo */
             --text-light: #F0F0F0; /* Grigio chiaro */
@@ -129,6 +126,7 @@
         }
 
         .hamburger {
+    z-index: 102 !important;
             display: none;
             flex-direction: column;
             justify-content: space-between;
@@ -196,6 +194,7 @@
             }
 
             .hamburger {
+    z-index: 102 !important;
                 display: flex;
             }
             
@@ -854,337 +853,335 @@
             box-shadow: 0 0 18px var(--shadow-color-secondary);
         }
     
-/* Fallback for visibility if GSAP is not active */
-.about-item, .skill-card, .project-item, .testimonial-card, .faq-item {
+/* Fallback for content visibility */
+.about-item,
+.skill-card,
+.project-item,
+.testimonial-card,
+.faq-item {
     opacity: 1 !important;
     transform: none !important;
 }
 
+/* Fix per hamburger menu - background e overlay */
 @media(max-width: 768px) {
     .nav-links {
         background: rgba(0, 0, 0, 0.95) !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 99 !important;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
     }
+
     .nav-links.nav-active {
-        transform: translateX(0%);
+        transform: translateX(0%) !important;
     }
-}
 
-/* Correzione overflow contenuti e compenetrazione */
-.about-grid, .skills-grid, .projects-grid, .testimonial-carousel, .faq-container {
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
+    .nav-links a {
+        font-size: 1.6rem !important;
+        margin: 1.2rem 0;
+        color: white !important;
+        text-shadow: 0 0 10px #00FF99;
+    }
 
-.project-item img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
+    .hamburger {
+        z-index: 999 !important;
+    }
 
-.about-item, .skill-card, .project-item, .testimonial-card, .faq-item {
-    overflow: hidden;
-}
-
-@media(max-width: 768px) {
-    .project-item img {
-        height: auto !important;
+    body.no-scroll {
+        overflow: hidden !important;
     }
 }
 </style>
 </head>
 <body>
-    <div id="preloader">
-        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
-            <img alt="Caricamento" src="https://via.placeholder.com/400x220?text=Progetto" style="width:100px; border-radius:50%; box-shadow: 0 0 20px var(--primary-accent);"/>
-            <p style="color:var(--text-light);margin-top:2rem;font-size:1.4rem; font-family: 'Oxanium', sans-serif; text-shadow: 0 0 10px var(--primary-accent);">Caricamento Portfolio...</p>
-        </div>
-    </div>
-
-    <nav>
-        <div class="logo-container">
-            <img alt="Logo" src="https://via.placeholder.com/400x220?text=Progetto"/>
-            <div class="logo">Il Mio Nome</div>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="nav-links" id="nav-links">
-            <a href="#home" class="nav-link-item">Home</a>
-            <a href="#about" class="nav-link-item">About</a>
-            <a href="#skills" class="nav-link-item">Skills</a>
-            <a href="#projects" class="nav-link-item">Projects</a>
-            <a href="#testimonials" class="nav-link-item">Testimonianze</a>
-            <a href="#faq" class="nav-link-item">FAQ</a>
-            <a href="#contact" class="nav-link-item">Contact</a>
-        </div>
-    </nav>
-
-    <header id="home">
-        <canvas id="bg-canvas"></canvas>
-        <div class="hero-content">
-            <div class="title">Ciao, sono <span class="highlight">Il Mio Nome</span>.</div>
-            <div class="subtitle">Sono un <span class="highlight"><span id="typed-text"></span></span></div>
-            <p class="description">
+<div id="preloader">
+<div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+<img alt="Caricamento" src="assets/images/profile.jpg" style="width:100px; border-radius:50%; box-shadow: 0 0 20px var(--primary-accent);"/>
+<p style="color:var(--text-light);margin-top:2rem;font-size:1.4rem; font-family: 'Oxanium', sans-serif; text-shadow: 0 0 10px var(--primary-accent);">Caricamento Portfolio...</p>
+</div>
+</div>
+<nav>
+<div class="logo-container">
+<img alt="Logo" src="assets/images/profile.jpg"/>
+<div class="logo">[Il Tuo Nome]</div>
+</div>
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<div class="nav-links" id="nav-links">
+<a class="nav-link-item" href="#home">Home</a>
+<a class="nav-link-item" href="#about">About</a>
+<a class="nav-link-item" href="#skills">Skills</a>
+<a class="nav-link-item" href="#projects">Projects</a>
+<a class="nav-link-item" href="#testimonials">Testimonianze</a>
+<a class="nav-link-item" href="#faq">FAQ</a>
+<a class="nav-link-item" href="#contact">Contact</a>
+</div>
+</nav>
+<header id="home">
+<canvas id="bg-canvas"></canvas>
+<div class="hero-content">
+<div class="title">Ciao, sono <span class="highlight">[Il Tuo Nome]</span>.</div>
+<div class="subtitle">Sono un <span class="highlight"><span id="typed-text"></span></span></div>
+<p class="description">
                 Sono un professionista appassionato di **sviluppo web, design grafico e marketing digitale** con un focus sulla creazione di soluzioni innovative e di impatto. La mia missione è trasformare idee complesse in esperienze utente intuitive e coinvolgenti. Esplora i miei lavori e scopri come posso aiutarti a raggiungere i tuoi obiettivi, fornendo competenze all'avanguardia e una dedizione totale al successo del tuo progetto.
             </p>
-            <a class="cta-button" href="#projects">Scopri i Miei Progetti</a>
-        </div>
-        <div class="separator"></div>
-    </header>
-
-    <section class="about-section" id="about">
-        <h2>Chi <span class="highlight">Sono</span></h2>
-        <p class="description">
+<a class="cta-button" href="#projects">Scopri i Miei Progetti</a>
+</div>
+<div class="separator"></div>
+</header>
+<section class="about-section gsap-active" id="about">
+<h2>Chi <span class="highlight">Sono</span></h2>
+<p class="description">
             Con **più di 5 anni** di esperienza nel settore digitale, ho affinato le mie competenze nello **sviluppo full-stack, nel design UI/UX e nella gestione di progetti complessi**. Ho avuto l'opportunità di lavorare su una vasta gamma di progetti, spaziando da **applicazioni web interattive** a **campagne di marketing digitale** di successo. Credo fermamente nell'approccio collaborativo, nell'apprendimento continuo e nella costante ricerca dell'eccellenza per offrire risultati che superino le aspettative. La mia filosofia si basa sull'ascolto attivo delle esigenze del cliente per fornire soluzioni personalizzate e di alta qualità, con un occhio sempre attento alle ultime tendenze tecnologiche e di design.
         </p>
-        <div class="about-grid">
-            <div class="about-item">
-                <div class="about-value">5+</div> 
-                <div class="about-label">Anni di Esperienza</div>
-            </div>
-            <div class="about-item">
-                <div class="about-value">80+</div> 
-                <div class="about-label">Progetti Completati</div>
-            </div>
-            <div class="about-item">
-                <div class="about-value">30+</div> 
-                <div class="about-label">Clienti Soddisfatti</div>
-            </div>
-            <div class="about-item">
-                <div class="about-value">Certificato Pro</div> 
-                <div class="about-label">Certificazioni/Premi</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="skills-section" id="skills">
-        <h2>Le mie <span class="highlight">Competenze</span></h2>
-        <p class="description">
+<div class="about-grid">
+<div class="about-item">
+<div class="about-value">5+</div>
+<div class="about-label">Anni di Esperienza</div>
+</div>
+<div class="about-item">
+<div class="about-value">80+</div>
+<div class="about-label">Progetti Completati</div>
+</div>
+<div class="about-item">
+<div class="about-value">30+</div>
+<div class="about-label">Clienti Soddisfatti</div>
+</div>
+<div class="about-item">
+<div class="about-value">Certificato Pro</div>
+<div class="about-label">Certificazioni/Premi</div>
+</div>
+</div>
+</section>
+<section class="skills-section gsap-active" id="skills">
+<h2>Le mie <span class="highlight">Competenze</span></h2>
+<p class="description">
             Ecco alcune delle aree in cui eccello e gli strumenti che utilizzo quotidianamente per dare vita alle mie idee e risolvere problemi complessi, garantendo soluzioni efficienti e all'avanguardia. Dalla programmazione al design, passando per la strategia digitale, sono in grado di coprire un ampio spettro di esigenze per portare il tuo progetto al successo.
         </p>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fas fa-laptop-code"></i> 
-                <h3>Sviluppo Web</h3>
-                <p>Frontend (HTML5, CSS3, JavaScript ES6+, React, Vue.js), Backend (Node.js, Python/Django, PHP/Laravel), Database (MongoDB, PostgreSQL, MySQL). Costruisco applicazioni web robuste e scalabili.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-palette"></i> 
-                <h3>Design Grafico & UI/UX</h3>
-                <p>Adobe Photoshop, Illustrator, Figma, Sketch. Creazione di interfacce utente intuitive, user experience fluide, branding e illustrazioni digitali per un impatto visivo straordinario.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-mobile-alt"></i> 
-                <h3>Mobile Development</h3>
-                <p>Sviluppo di applicazioni native per iOS (Swift) e Android (Kotlin), e ibride con React Native e Flutter per un'ampia compatibilità e prestazioni ottimali su qualsiasi dispositivo.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-search-dollar"></i> 
-                <h3>Digital Marketing</h3>
-                <p>Strategie SEO (Search Engine Optimization), campagne SEM (Search Engine Marketing), Social Media Marketing, Content Marketing e analisi delle performance per massimizzare la visibilità online e il ROI.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-film"></i> 
-                <h3>Video Editing & Motion Graphics</h3>
-                <p>Adobe Premiere Pro, After Effects, DaVinci Resolve. Creazione e montaggio video professionali, animazioni grafiche e effetti speciali per contenuti dinamici e coinvolgenti.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-cloud"></i> 
-                <h3>Cloud & DevOps</h3>
-                <p>Esperienza con piattaforme Cloud (AWS, Google Cloud, Azure), containerizzazione (Docker), orchestrazione (Kubernetes) per la gestione e il deployment di infrastrutture scalabili e robuste.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="projects-section" id="projects">
-        <h2>I miei <span class="highlight">Progetti</span></h2>
-        <p class="description">
+<div class="skills-grid">
+<div class="skill-card">
+<i class="fas fa-laptop-code"></i>
+<h3>Sviluppo Web</h3>
+<p>Frontend (HTML5, CSS3, JavaScript ES6+, React, Vue.js), Backend (Node.js, Python/Django, PHP/Laravel), Database (MongoDB, PostgreSQL, MySQL). Costruisco applicazioni web robuste e scalabili.</p>
+</div>
+<div class="skill-card">
+<i class="fas fa-palette"></i>
+<h3>Design Grafico &amp; UI/UX</h3>
+<p>Adobe Photoshop, Illustrator, Figma, Sketch. Creazione di interfacce utente intuitive, user experience fluide, branding e illustrazioni digitali per un impatto visivo straordinario.</p>
+</div>
+<div class="skill-card">
+<i class="fas fa-mobile-alt"></i>
+<h3>Mobile Development</h3>
+<p>Sviluppo di applicazioni native per iOS (Swift) e Android (Kotlin), e ibride con React Native e Flutter per un'ampia compatibilità e prestazioni ottimali su qualsiasi dispositivo.</p>
+</div>
+<div class="skill-card">
+<i class="fas fa-search-dollar"></i>
+<h3>Digital Marketing</h3>
+<p>Strategie SEO (Search Engine Optimization), campagne SEM (Search Engine Marketing), Social Media Marketing, Content Marketing e analisi delle performance per massimizzare la visibilità online e il ROI.</p>
+</div>
+<div class="skill-card">
+<i class="fas fa-film"></i>
+<h3>Video Editing &amp; Motion Graphics</h3>
+<p>Adobe Premiere Pro, After Effects, DaVinci Resolve. Creazione e montaggio video professionali, animazioni grafiche e effetti speciali per contenuti dinamici e coinvolgenti.</p>
+</div>
+<div class="skill-card">
+<i class="fas fa-cloud"></i>
+<h3>Cloud &amp; DevOps</h3>
+<p>Esperienza con piattaforme Cloud (AWS, Google Cloud, Azure), containerizzazione (Docker), orchestrazione (Kubernetes) per la gestione e il deployment di infrastrutture scalabili e robuste.</p>
+</div>
+</div>
+</section>
+<section class="projects-section gsap-active" id="projects">
+<h2>I miei <span class="highlight">Progetti</span></h2>
+<p class="description">
             Una selezione dei miei lavori più significativi che dimostrano le mie competenze e la mia passione per la creazione di soluzioni innovative. Ogni progetto è stato una sfida unica, affrontata con dedizione e attenzione ai dettagli per garantire un risultato eccellente e funzionale.
         </p>
-        <div class="projects-grid">
-            <div class="project-item">
-                <img src="https://via.placeholder.com/400x220?text=Progetto" alt="Progetto 1 - E-commerce Avanzato"/>
-                <div class="project-overlay">
-                    <h3>E-commerce Avanzato</h3>
-                    <p>Piattaforma e-commerce completa con gestione ordini, pagamenti e catalogo prodotti. **Tecnologie:** React, Node.js, MongoDB.</p>
-                    <a href="https://www.example.com/project1" target="_blank" class="view-project-btn">Vedi Progetto</a>
-                </div>
-            </div>
-            <div class="project-item">
-                <img src="https://via.placeholder.com/400x220?text=Progetto" alt="Progetto 2 - App Mobile per Eventi"/>
-                <div class="project-overlay">
-                    <h3>App Mobile per Eventi</h3>
-                    <p>Applicazione mobile per la gestione e la partecipazione a eventi. **Tecnologie:** React Native, Firebase.</p>
-                    <a href="https://www.example.com/project2" target="_blank" class="view-project-btn">Vedi Progetto</a>
-                </div>
-            </div>
-            <div class="project-item">
-                <img src="https://via.placeholder.com/400x220?text=Progetto" alt="Progetto 3 - Piattaforma di Formazione Online"/>
-                <div class="project-overlay">
-                    <h3>Piattaforma di Formazione Online</h3>
-                    <p>Sistema LMS (Learning Management System) per corsi interattivi. **Tecnologie:** Vue.js, Python, PostgreSQL.</p>
-                    <a href="https://www.example.com/project3" target="_blank" class="view-project-btn">Vedi Progetto</a>
-                </div>
-            </div>
-            <div class="project-item">
-                <img src="https://via.placeholder.com/400x220?text=Progetto+4" alt="Progetto 4 - Sito Vetrina Aziendale"/>
-                <div class="project-overlay">
-                    <h3>Sito Vetrina Aziendale</h3>
-                    <p>Design e sviluppo di un sito web responsivo e ottimizzato per un'azienda locale. **Tecnologie:** HTML, CSS, JavaScript, WordPress.</p>
-                    <a href="https://www.example.com/project4" target="_blank" class="view-project-btn">Vedi Progetto</a>
-                </div>
-            </div>
-            <div class="project-item">
-                <img src="https://via.placeholder.com/400x220?text=Progetto+5" alt="Progetto 5 - Dashboard Analitica"/>
-                <div class="project-overlay">
-                    <h3>Dashboard Analitica Interattiva</h3>
-                    <p>Interfaccia utente per la visualizzazione di dati complessi con grafici dinamici. **Tecnologie:** D3.js, Chart.js, Flask (Python).</p>
-                    <a href="https://www.example.com/project5" target="_blank" class="view-project-btn">Vedi Progetto</a>
-                </div>
-            </div>
-            <div class="project-item">
-                <img src="https://via.placeholder.com/400x220?text=Progetto+6" alt="Progetto 6 - Rebranding e UI/UX"/>
-                <div class="project-overlay">
-                    <h3>Rebranding e UI/UX App</h3>
-                    <p>Progetto completo di rebranding aziendale e riprogettazione dell'interfaccia utente per un'applicazione mobile esistente. **Strumenti:** Figma, Adobe XD.</p>
-                    <a href="https://www.example.com/project6" target="_blank" class="view-project-btn">Vedi Progetto</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials-section" id="testimonials">
-        <h2>Cosa Dicono i <span class="highlight">Miei Clienti</span></h2>
-        <p class="description">
+<div class="projects-grid">
+<div class="project-item">
+<img alt="Progetto 1 - E-commerce Avanzato" src="assets/images/project1.jpg"/>
+<div class="project-overlay">
+<h3>E-commerce Avanzato</h3>
+<p>Piattaforma e-commerce completa con gestione ordini, pagamenti e catalogo prodotti. **Tecnologie:** React, Node.js, MongoDB.</p>
+<a class="view-project-btn" href="https://www.example.com/project1" target="_blank">Vedi Progetto</a>
+</div>
+</div>
+<div class="project-item">
+<img alt="Progetto 2 - App Mobile per Eventi" src="assets/images/project2.jpg"/>
+<div class="project-overlay">
+<h3>App Mobile per Eventi</h3>
+<p>Applicazione mobile per la gestione e la partecipazione a eventi. **Tecnologie:** React Native, Firebase.</p>
+<a class="view-project-btn" href="https://www.example.com/project2" target="_blank">Vedi Progetto</a>
+</div>
+</div>
+<div class="project-item">
+<img alt="Progetto 3 - Piattaforma di Formazione Online" src="assets/images/project3.jpg"/>
+<div class="project-overlay">
+<h3>Piattaforma di Formazione Online</h3>
+<p>Sistema LMS (Learning Management System) per corsi interattivi. **Tecnologie:** Vue.js, Python, PostgreSQL.</p>
+<a class="view-project-btn" href="https://www.example.com/project3" target="_blank">Vedi Progetto</a>
+</div>
+</div>
+<div class="project-item">
+<img alt="Progetto 4 - Sito Vetrina Aziendale" src="https://via.placeholder.com/400x220?text=Progetto+4"/>
+<div class="project-overlay">
+<h3>Sito Vetrina Aziendale</h3>
+<p>Design e sviluppo di un sito web responsivo e ottimizzato per un'azienda locale. **Tecnologie:** HTML, CSS, JavaScript, WordPress.</p>
+<a class="view-project-btn" href="https://www.example.com/project4" target="_blank">Vedi Progetto</a>
+</div>
+</div>
+<div class="project-item">
+<img alt="Progetto 5 - Dashboard Analitica" src="https://via.placeholder.com/400x220?text=Progetto+5"/>
+<div class="project-overlay">
+<h3>Dashboard Analitica Interattiva</h3>
+<p>Interfaccia utente per la visualizzazione di dati complessi con grafici dinamici. **Tecnologie:** D3.js, Chart.js, Flask (Python).</p>
+<a class="view-project-btn" href="https://www.example.com/project5" target="_blank">Vedi Progetto</a>
+</div>
+</div>
+<div class="project-item">
+<img alt="Progetto 6 - Rebranding e UI/UX" src="https://via.placeholder.com/400x220?text=Progetto+6"/>
+<div class="project-overlay">
+<h3>Rebranding e UI/UX App</h3>
+<p>Progetto completo di rebranding aziendale e riprogettazione dell'interfaccia utente per un'applicazione mobile esistente. **Strumenti:** Figma, Adobe XD.</p>
+<a class="view-project-btn" href="https://www.example.com/project6" target="_blank">Vedi Progetto</a>
+</div>
+</div>
+</div>
+</section>
+<section class="testimonials-section gsap-active" id="testimonials">
+<h2>Cosa Dicono i <span class="highlight">Miei Clienti</span></h2>
+<p class="description">
             La soddisfazione dei clienti è la mia priorità assoluta. Ecco alcune delle loro esperienze, che riflettono l'impegno, la professionalità e la passione che metto in ogni progetto per raggiungere risultati eccellenti e duraturi.
         </p>
-        <div class="testimonial-carousel">
-            <div class="testimonial-card">
-                <p class="testimonial-quote">"Il team ha trasformato completamente la nostra presenza online. Il nuovo sito è incredibilmente veloce, intuitivo e ha superato ogni nostra aspettativa in termini di design e funzionalità. Un vero professionista!"</p>
-                <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/60x60?text=C1" alt="Cliente 1"/>
-                    <div class="author-details">
-                        <strong>Mario Rossi</strong>
-                        <span>CEO, Tech Solutions</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-quote">"Sono rimasto colpito dalla sua attenzione ai dettagli e dalla capacità di tradurre le mie idee in un design eccezionale. La comunicazione è stata impeccabile e il risultato finale è un vero capolavoro."</p>
-                <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/60x60?text=C2" alt="Cliente 2"/>
-                    <div class="author-details">
-                        <strong>Anna Verdi</strong>
-                        <span>Founder, Green Innovations</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-quote">"Un partner affidabile e competente. Ha saputo gestire un progetto complesso con grande professionalità, consegnando il lavoro nei tempi previsti e con una qualità eccellente. Consigliatissimo!"</p>
-                <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/60x60?text=C3" alt="Cliente 3"/>
-                    <div class="author-details">
-                        <strong>Luca Bianchi</strong>
-                        <span>Marketing Manager, Global Corp</span>
-                    </div>
-                </div>
-            </div>
-             <div class="testimonial-card">
-                <p class="testimonial-quote">"La consulenza strategica fornita è stata fondamentale per il lancio del nostro nuovo prodotto. Ha dimostrato una profonda conoscenza del mercato e una visione innovativa, portandoci a risultati concreti e misurabili."</p>
-                <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/60x60?text=C4" alt="Cliente 4"/>
-                    <div class="author-details">
-                        <strong>Giulia Neri</strong>
-                        <span>Startup CEO, Future Labs</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="carousel-nav">
-            <button id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
-            <button id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </section>
-
-    <section class="faq-section" id="faq">
-        <h2>Domande <span class="highlight">Frequenti (FAQ)</span></h2>
-        <p class="description">
+<div class="testimonial-carousel">
+<div class="testimonial-card">
+<p class="testimonial-quote">"Il team ha trasformato completamente la nostra presenza online. Il nuovo sito è incredibilmente veloce, intuitivo e ha superato ogni nostra aspettativa in termini di design e funzionalità. Un vero professionista!"</p>
+<div class="testimonial-author">
+<img alt="Cliente 1" src="https://via.placeholder.com/60x60?text=C1"/>
+<div class="author-details">
+<strong>Mario Rossi</strong>
+<span>CEO, Tech Solutions</span>
+</div>
+</div>
+</div>
+<div class="testimonial-card">
+<p class="testimonial-quote">"Sono rimasto colpito dalla sua attenzione ai dettagli e dalla capacità di tradurre le mie idee in un design eccezionale. La comunicazione è stata impeccabile e il risultato finale è un vero capolavoro."</p>
+<div class="testimonial-author">
+<img alt="Cliente 2" src="https://via.placeholder.com/60x60?text=C2"/>
+<div class="author-details">
+<strong>Anna Verdi</strong>
+<span>Founder, Green Innovations</span>
+</div>
+</div>
+</div>
+<div class="testimonial-card">
+<p class="testimonial-quote">"Un partner affidabile e competente. Ha saputo gestire un progetto complesso con grande professionalità, consegnando il lavoro nei tempi previsti e con una qualità eccellente. Consigliatissimo!"</p>
+<div class="testimonial-author">
+<img alt="Cliente 3" src="https://via.placeholder.com/60x60?text=C3"/>
+<div class="author-details">
+<strong>Luca Bianchi</strong>
+<span>Marketing Manager, Global Corp</span>
+</div>
+</div>
+</div>
+<div class="testimonial-card">
+<p class="testimonial-quote">"La consulenza strategica fornita è stata fondamentale per il lancio del nostro nuovo prodotto. Ha dimostrato una profonda conoscenza del mercato e una visione innovativa, portandoci a risultati concreti e misurabili."</p>
+<div class="testimonial-author">
+<img alt="Cliente 4" src="https://via.placeholder.com/60x60?text=C4"/>
+<div class="author-details">
+<strong>Giulia Neri</strong>
+<span>Startup CEO, Future Labs</span>
+</div>
+</div>
+</div>
+</div>
+<div class="carousel-nav">
+<button id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
+<button id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
+</div>
+</section>
+<section class="faq-section gsap-active" id="faq">
+<h2>Domande <span class="highlight">Frequenti (FAQ)</span></h2>
+<p class="description">
             Ecco alcune risposte alle domande più comuni che mi vengono poste riguardo ai miei servizi e al mio processo di lavoro. Spero che ti siano utili per chiarire ogni dubbio! Se non trovi la risposta che cerchi, non esitare a contattarmi direttamente.
         </p>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
+<div class="faq-container">
+<div class="faq-item">
+<div class="faq-question">
                     Qual è il tuo processo di lavoro standard per un nuovo progetto?
                     <i class="fas fa-plus"></i> </div>
-                <div class="faq-answer">
-                    <p>Il mio processo di lavoro si articola in diverse fasi ben definite per garantire trasparenza e risultati ottimali. Inizia con una fase di **Discovery & Analisi** approfondita delle tue esigenze e obiettivi. Segue la **Progettazione**, dove creiamo wireframe, prototipi e design visivi. Poi si passa allo **Sviluppo** vero e proprio, con l'implementazione tecnica. Infine, abbiamo la fase di **Test & Revisione** per garantire qualità e funzionalità, prima del **Lancio & Supporto** (messa online e assistenza post-lancio). Ogni passaggio è pensato per coinvolgerti e assicurare che il risultato finale sia perfettamente allineato alle tue aspettative.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
+<div class="faq-answer">
+<p>Il mio processo di lavoro si articola in diverse fasi ben definite per garantire trasparenza e risultati ottimali. Inizia con una fase di **Discovery &amp; Analisi** approfondita delle tue esigenze e obiettivi. Segue la **Progettazione**, dove creiamo wireframe, prototipi e design visivi. Poi si passa allo **Sviluppo** vero e proprio, con l'implementazione tecnica. Infine, abbiamo la fase di **Test &amp; Revisione** per garantire qualità e funzionalità, prima del **Lancio &amp; Supporto** (messa online e assistenza post-lancio). Ogni passaggio è pensato per coinvolgerti e assicurare che il risultato finale sia perfettamente allineato alle tue aspettative.</p>
+</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">
                     Quanto tempo ci richiede tipicamente per completare un progetto?
                     <i class="fas fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>La durata di un progetto varia considerevolmente in base alla sua complessità, alla grandezza e alle specifiche funzionalità richieste. Un sito web vetrina semplice potrebbe richiedere 3-4 settimane, mentre un'applicazione web complessa o una piattaforma e-commerce avanzata potrebbe impiegare dai 2 ai 5 mesi. Dopo una fase di analisi iniziale dettagliata, sarò in grado di fornirti una stima dei tempi più accurata e un cronogramma preciso per il tuo progetto specifico. La puntualità è una delle mie priorità.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
+</div>
+<div class="faq-answer">
+<p>La durata di un progetto varia considerevolmente in base alla sua complessità, alla grandezza e alle specifiche funzionalità richieste. Un sito web vetrina semplice potrebbe richiedere 3-4 settimane, mentre un'applicazione web complessa o una piattaforma e-commerce avanzata potrebbe impiegare dai 2 ai 5 mesi. Dopo una fase di analisi iniziale dettagliata, sarò in grado di fornirti una stima dei tempi più accurata e un cronogramma preciso per il tuo progetto specifico. La puntualità è una delle mie priorità.</p>
+</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">
                     Fornisci servizi di manutenzione e supporto post-lancio?
                     <i class="fas fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Assolutamente sì! Offro pacchetti di manutenzione e supporto post-lancio personalizzabili per garantire che il tuo progetto rimanga sempre aggiornato, sicuro e performante nel tempo. Questi pacchetti possono includere aggiornamenti di sicurezza, backup regolari, monitoraggio delle prestazioni, ottimizzazione del codice e risoluzione rapida di eventuali bug. Il mio obiettivo è assicurare la longevità e l'efficacia della soluzione anche dopo la consegna.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
+</div>
+<div class="faq-answer">
+<p>Assolutamente sì! Offro pacchetti di manutenzione e supporto post-lancio personalizzabili per garantire che il tuo progetto rimanga sempre aggiornato, sicuro e performante nel tempo. Questi pacchetti possono includere aggiornamenti di sicurezza, backup regolari, monitoraggio delle prestazioni, ottimizzazione del codice e risoluzione rapida di eventuali bug. Il mio obiettivo è assicurare la longevità e l'efficacia della soluzione anche dopo la consegna.</p>
+</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">
                     Quali sono i costi dei tuoi servizi e come vengono calcolati?
                     <i class="fas fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Ogni progetto è unico, e per questo i costi sono calcolati in base alla sua portata specifica, alla complessità delle funzionalità richieste, alle tecnologie da impiegare e al tempo stimato per la realizzazione. Non applico tariffe fisse universali. Ti invito a contattarmi per una consulenza gratuita e senza impegno: dopo aver discusso le tue esigenze e obiettivi, sarò lieto di fornirti un preventivo dettagliato e trasparente, con tutte le voci di costo chiaramente specificate.</p>
-                </div>
-            </div>
-             <div class="faq-item">
-                <div class="faq-question">
+</div>
+<div class="faq-answer">
+<p>Ogni progetto è unico, e per questo i costi sono calcolati in base alla sua portata specifica, alla complessità delle funzionalità richieste, alle tecnologie da impiegare e al tempo stimato per la realizzazione. Non applico tariffe fisse universali. Ti invito a contattarmi per una consulenza gratuita e senza impegno: dopo aver discusso le tue esigenze e obiettivi, sarò lieto di fornirti un preventivo dettagliato e trasparente, con tutte le voci di costo chiaramente specificate.</p>
+</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">
                     Posso vedere esempi dei tuoi lavori precedenti?
                     <i class="fas fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Certamente! Nella sezione "I miei Progetti" di questo portfolio, troverai una selezione dei miei lavori più recenti e significativi. Ogni progetto è accompagnato da una breve descrizione, le tecnologie utilizzate e, quando possibile, un link diretto per visualizzarlo dal vivo. Sono sempre felice di condividere ulteriori dettagli o studi di caso su richiesta per darti un quadro completo delle mie capacità e dello stile di lavoro.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section" id="contact">
-        <h2>Mettiamoci in <span class="highlight">Contatto</span></h2>
-        <p class="description">
+</div>
+<div class="faq-answer">
+<p>Certamente! Nella sezione "I miei Progetti" di questo portfolio, troverai una selezione dei miei lavori più recenti e significativi. Ogni progetto è accompagnato da una breve descrizione, le tecnologie utilizzate e, quando possibile, un link diretto per visualizzarlo dal vivo. Sono sempre felice di condividere ulteriori dettagli o studi di caso su richiesta per darti un quadro completo delle mie capacità e dello stile di lavoro.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="contact-section" id="contact">
+<h2>Mettiamoci in <span class="highlight">Contatto</span></h2>
+<p class="description">
             Se sei interessato a collaborare su un nuovo progetto, hai una domanda specifica o vuoi semplicemente salutarmi, non esitare a contattarmi. Sono sempre aperto a nuove opportunità e connessioni professionali, e rispondo solitamente entro 24-48 ore. Non vedo l'ora di sentire la tua idea!
         </p>
-        <div class="contact-buttons">
-            <a class="cta-button" href="mailto:email@example.com"><i class="fas fa-envelope"></i> Invia una Email</a>
-            <a class="cta-button" href="https://www.linkedin.com/in/profilo-open-source" target="_blank"><i class="fab fa-linkedin"></i> Connettiti su LinkedIn</a>
-            <a class="cta-button" href="https://github.com/opensource-user" target="_blank"><i class="fab fa-github"></i> Visita il Mio GitHub</a>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2025 Il Mio Nome. Tutti i diritti riservati.</p>
-        <p>Realizzato con ❤️ e codice da <a href="https://github.com/opensource-user" target="_blank">Open Source Developer</a></p>
-    </footer>
-
-    <button id="backToTop" title="Torna su">↑</button>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> 
-
-    <script>
+<div class="contact-buttons">
+<a class="cta-button" href="mailto:tua.email@example.com"><i class="fas fa-envelope"></i> Invia una Email</a>
+<a class="cta-button" href="https://www.linkedin.com/in/tuo-profilo" target="_blank"><i class="fab fa-linkedin"></i> Connettiti su LinkedIn</a>
+<a class="cta-button" href="https://github.com/tuo-username" target="_blank"><i class="fab fa-github"></i> Visita il Mio GitHub</a>
+</div>
+</section>
+<footer>
+<p>© 2025 [Il Tuo Nome]. Tutti i diritti riservati.</p>
+<p>Realizzato con ❤️ e codice da <a href="https://github.com/tuo-username" target="_blank">[Il Tuo Nome/Brand Developer]</a></p>
+</footer>
+<button id="backToTop" title="Torna su">↑</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
         // --- Navbar Hamburger Menu ---
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.getElementById("nav-links");
