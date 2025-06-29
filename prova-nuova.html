@@ -155,75 +155,66 @@
             transform: translateY(-11px) rotate(-45deg);
         }
 
-        /* Media Queries per Navbar (Responsive Mobile) - RIVISTO PER OVERLAY CORRETTO */
+        /* Media Queries per Navbar (Responsive Mobile) - NUOVA REVISIONE PER MENU A TENDINA */
         @media(max-width:768px) {
             .nav-links {
-                display: flex; /* Always flex to control visibility */
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+                display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                background: rgba(0, 0, 0, 0.98); /* Sfondo scuro per overlay */
-                backdrop-filter: blur(12px);
-                padding: 0;
-                box-shadow: 0 6px 30px rgba(0,0,0,0.8);
-                transition: transform 0.4s ease-out;
-                transform: translateX(100%); /* Nascosto a destra */
-                z-index: 99; /* Sotto l'hamburger ma sopra il resto */
+                position: absolute; /* Posizionato relativamente al genitore 'nav' */
+                top: 100%; /* Sotto la nav principale */
+                left: 0;
+                width: 100%; /* Larga quanto la nav principale */
+                max-height: 0; /* Inizialmente nascosta (altezza zero) */
+                overflow: hidden; /* Nasconde il contenuto in eccesso */
+                background: rgba(10, 10, 10, 0.98); /* Sfondo per il menu a tendina */
+                border-top: 1px solid var(--border-color); /* Bordo superiore opzionale */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+                transition: max-height 0.4s ease-out, opacity 0.4s ease-out; /* Transizione fluida */
+                opacity: 0; /* Inizialmente trasparente */
+                z-index: 98; /* Sotto la nav principale ma sopra il contenuto della pagina */
+                align-items: flex-start; /* Allinea i link a sinistra */
+                padding: 0 1.5rem; /* Aggiunge padding interno al menu */
             }
 
             .nav-links.nav-active {
-                transform: translateX(0%); /* Visibile */
+                max-height: 500px; /* Altezza sufficiente per mostrare tutti i link */
+                opacity: 1; /* Completamente visibile */
             }
 
             .nav-links a {
-                margin: 1.2rem 0;
-                text-align: center;
-                font-size: 1.6rem; /* Aumentato dimensione per mobile */
-                padding: 0.8rem 0;
-                color: var(--text-light); /* Colore per assicurare visibilità */
-                text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+                width: 100%; /* Rende i link larghi quanto il menu a tendina */
+                padding: 0.8rem 0; /* Padding ridotto per link compatti */
+                text-align: left; /* Allinea il testo a sinistra */
+                font-size: 1.1rem; /* Dimensione font più piccola */
+                margin: 0; /* Rimuove margini verticali tra i link */
+                border-bottom: 1px solid rgba(255,255,255,0.05); /* Separatore tra i link */
             }
-            .nav-links a::after {
-                height: 4px;
-                bottom: -8px;
+            .nav-links a:last-child {
+                border-bottom: none; /* Nessun bordo sull'ultimo link */
             }
 
             .hamburger {
-                z-index: 102; /* Ensure hamburger is above the overlay */
+                z-index: 101; /* Assicura che l'hamburger sia sopra i nav-links ma sotto la nav fissa */
                 display: flex;
             }
             
-            /* Impedisce lo scroll del body quando il menu è aperto */
+            /* Rimuovi effetti di blur/nascondimento del body, poiché non è più un overlay a schermo intero */
             body.no-scroll {
-                overflow: hidden;
+                overflow: auto; /* Permette lo scroll */
+            }
+            body.no-scroll > *:not(nav):not(#preloader) {
+                filter: none;
+                pointer-events: auto;
+            }
+            body.no-scroll header {
+                visibility: visible;
             }
 
-            /* Ensure header content is not visible behind the menu */
-            header {
-                position: relative; /* Ensure it respects z-index */
+            /* Importante: la nav genitore deve essere position: relative per i figli assoluti */
+            /* La nav è già fixed, ma un elemento fixed può anche essere un contenitore di posizionamento */
+            nav {
+                position: relative; /* Rende la nav un contenitore di posizionamento per .nav-links */
             }
-        }
-
-        /* Additional fix for general content visibility behind the menu */
-        body.no-scroll > *:not(nav):not(#preloader) {
-            filter: blur(5px); /* Optional: blur background content when menu is open */
-            pointer-events: none; /* Disable interaction with background content */
-        }
-        body.no-scroll header {
-            visibility: hidden; /* Hide header content explicitly */
-        }
-
-        /* Override specific z-index for hamburger to be always on top */
-        .hamburger {
-            z-index: 1000 !important; /* Make sure it's the highest */
-        }
-        .nav-links {
-            z-index: 999 !important; /* Make sure menu is just below hamburger */
         }
 
         /* --- Header / Hero Section --- */
@@ -885,44 +876,6 @@
     transform: none !important;
 }
 
-/* Fix per hamburger menu - background e overlay */
-@media(max-width: 768px) {
-    .nav-links {
-        background: rgba(0, 0, 0, 0.98) !important; /* Increased opacity for full coverage */
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        z-index: 99 !important; /* Ensure it's above normal content */
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.4s ease-out; /* Slightly longer transition for smoothness */
-        backdrop-filter: blur(12px); /* Keep the blur for aesthetic */
-    }
-
-    .nav-links.nav-active {
-        transform: translateX(0%) !important;
-    }
-
-    .nav-links a {
-        font-size: 1.8rem !important; /* Slightly larger font for better touchability */
-        margin: 1.5rem 0; /* More spacing between links */
-        color: var(--text-light) !important; /* Use defined light text color */
-        text-shadow: 0 0 15px var(--primary-accent); /* Stronger text shadow */
-    }
-
-    .hamburger {
-        z-index: 100 !important; /* Ensure hamburger icon is always on top of the overlay */
-    }
-
-    body.no-scroll {
-        overflow: hidden !important;
-    }
-}
 </style>
 </head>
 <body>
@@ -1214,7 +1167,8 @@
             hamburger.addEventListener("click", () => {
                 navLinks.classList.toggle("nav-active");
                 hamburger.classList.toggle("active");
-                body.classList.toggle("no-scroll"); // Impedisce lo scroll del body
+                // NON disabilitare più lo scroll del body, il menu non è a schermo intero
+                // body.classList.toggle("no-scroll"); 
             });
 
             document.querySelectorAll('.nav-link-item').forEach(link => {
@@ -1223,7 +1177,8 @@
                     if (navLinks.classList.contains('nav-active')) {
                         navLinks.classList.remove("nav-active");
                         hamburger.classList.remove("active");
-                        body.classList.remove("no-scroll"); // Ripristina lo scroll del body
+                        // NON disabilitare più lo scroll del body
+                        // body.classList.remove("no-scroll"); 
                     }
                 });
             });
