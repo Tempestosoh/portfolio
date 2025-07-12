@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
 <meta charset="utf-8"/>
@@ -9,23 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <style>
     :root {
-      --bg: #0d0d0d;
-      --text: #fff;
-      --secondary: #ccc;
-      --card: #1a1a1a;
-      --border: #222;
-      --primary: red;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --bg: #0E0E1A; /* Molto scuro, quasi nero, leggermente bluastro, dal logo */
+      --text: #F0F0F0; /* Bianco morbido, dal logo */
+      --secondary: #A0A0B0; /* Grigio-viola desaturato per testi secondari */
+      --card: #161626; /* Sfondo scuro per le card, in armonia */
+      --border: #2A2A3D; /* Bordo leggermente più chiaro per contrasto */
+      --primary: #7B00FF; /* Viola vibrante e profondo dal logo, colore principale */
+      --shadow: rgba(123, 0, 255, 0.3); /* Ombra viola semi-trasparente */
     }
 
     body.light {
-      --bg: #f4f4f4;
-      --text: #000;
-      --secondary: #333;
-      --card: #fff;
-      --border: #ddd;
-      --primary: #e60000;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --bg: #FFFFFF; /* Bianco puro per il tema chiaro */
+      --text: #1A1A1A; /* Grigio molto scuro per il tema chiaro */
+      --secondary: #666666; /* Grigio medio */
+      --card: #F8F8F8; /* Card quasi bianca */
+      --border: #EEEEEE; /* Bordo grigio chiaro */
+      --primary: #8A2BE2; /* Viola leggermente più tenue ma vibrante per tema chiaro */
+      --shadow: rgba(138, 43, 226, 0.15); /* Ombra viola più leggera */
     }
 
     * {
@@ -106,6 +105,7 @@
       min-width: 120px;
     }
 
+    /* Stili per la navigazione desktop */
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -236,7 +236,7 @@
     }
 
     .skillbar {
-      background: #333;
+      background: #333; /* Questo è un colore fisso, ma si adatta bene allo sfondo scuro */
       border-radius: 10px;
       overflow: hidden;
       margin: 10px 0;
@@ -249,6 +249,7 @@
       font-weight: bold;
     }
 
+    /* Aggiornato per usare le variabili colore */
     .html { background: linear-gradient(to right, var(--primary) 100%, #333 0%); }
     .css { background: linear-gradient(to right, var(--primary) 100%, #333 0%); }
     .python { background: linear-gradient(to right, var(--primary) 45%, #333 45%); }
@@ -279,7 +280,7 @@
     }
 
     #toTopBtn:hover {
-      background: darkred;
+      background: var(--secondary); /* Cambiato da darkred al viola secondario */
     }
 
     @media (max-width: 768px) {
@@ -297,60 +298,89 @@
       }
 
       header {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row; /* Assicura che l'header rimanga orizzontale su mobile */
+        align-items: center;
+        justify-content: space-between; /* Spazia logo e hamburger */
         padding: 20px;
       }
+    }
 
-      nav {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: start;
-        margin-top: 10px;
+    /* NUOVO MENU HAMBURGER E STILI RESPONSIVE */
+    .hamburger-menu {
+      display: none; /* Nascosto di default per desktop */
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1000; /* Assicura che sia sopra gli altri contenuti */
+    }
+
+    .hamburger-menu .bar {
+      width: 100%;
+      height: 3px;
+      background-color: var(--text); /* Colore delle barre */
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    /* Animazione per il menu hamburger */
+    .hamburger-menu.open .bar:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+
+    .hamburger-menu.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.open .bar:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    /* Overlay della navigazione mobile */
+    nav#mainNav {
+      transition: all 0.4s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-menu {
+        display: flex; /* Mostra l'hamburger su mobile */
+        margin-left: auto; /* Spingilo a destra */
       }
 
-      nav a {
-        margin: 5px 10px;
+      nav#mainNav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg); /* Usa il colore di sfondo del menu */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%); /* Inizia fuori dallo schermo a destra */
+        opacity: 0;
+        pointer-events: none; /* Previene interazioni quando nascosto */
+        z-index: 998; /* Sotto l'hamburger, sopra il contenuto */
+        padding: 0; /* Rimuove il padding dell'header che potrebbe influenzare lo schermo intero */
+      }
+
+      nav#mainNav.show {
+        transform: translateX(0); /* Scorri dentro */
+        opacity: 1;
+        pointer-events: all; /* Permetti interazioni quando mostrato */
+      }
+
+      nav#mainNav a, nav#mainNav button.toggle-btn {
+        font-size: 1.8rem; /* Font più grande per i link mobile */
+        margin: 15px 0;
+        color: var(--text); /* Assicura che i link siano visibili */
+        text-decoration: none;
+        padding: 10px 20px;
       }
     }
-    .hamburger {
-  display: none;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  color: var(--text);
-  cursor: pointer;
-}
 
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-    margin-left: auto;
-  }
-
-  nav {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  nav.show {
-    display: flex;
-  }
-
-  nav a, nav button.toggle-btn {
-    margin: 10px 0;
-  }
-}
-@media (max-width: 768px) {
-  header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-  }
-}
-  
+    /* particles-js (originale da homepage (2).html) */
     #particles-js {
       position: absolute;
       width: 100%;
@@ -364,14 +394,12 @@
       overflow: hidden;
     }
 
-
-html {
-  scroll-behavior: smooth;
-}
-.section, header, footer {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
+    html {
+      scroll-behavior: smooth;
+    }
+    .section, header, footer {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
 </style>
 <style>
 .typewriter-text {
@@ -425,16 +453,19 @@ html {
 }
 </style></head>
 <body>
-<!-- Loader -->
 <div id="loader">
   <div style="display: flex; flex-direction: column; align-items: center;">
-    <img src="logo.png" alt="Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; object-fit: cover;" />
+    <img src="https://i.imgur.com/mFjGVe4.png" alt="Logo" style="width: 80px; height: 80px; margin-bottom: 20px; border-radius: 50%; object-fit: cover;" />
     <div class="spinner"></div>
   </div>
 </div>
 <header>
 <div class="logo">Tempestosoh</div>
-<button class="hamburger" onclick="toggleMenu()">☰</button>
+<div class="hamburger-menu" id="hamburgerMenu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
 <nav id="mainNav">
 <a href="#">Home</a>
 <a href="#chi">Chi Sono</a>
@@ -452,7 +483,7 @@ html {
 <a class="btn" href="#contatti">Contact</a>
 </div>
 <div class="hero-img">
-<img alt="Foto Profilo" src="logo.png"/>
+<img alt="Foto Profilo" src="https://i.imgur.com/mFjGVe4.png"/>
 </div>
 </section>
 <section class="section" id="chi">
@@ -500,24 +531,18 @@ html {
 <hr style="margin: 30px 0; border-color: var(--border);"/>
 <h3 style="margin-bottom: 20px;">✉️ Scrivimi un messaggio</h3>
 <form action="https://formsubmit.co/tempestosoh@gmail.com" id="contactForm" method="POST" onsubmit="return validateCaptcha(event)">
-<!-- Formsubmit hidden inputs -->
 <input name="_captcha" type="hidden" value="false"/>
 <input name="_template" type="hidden" value="table"/>
 <input name="_autoresponse" type="hidden" value="Grazie per avermi scritto! Ti risponderò il prima possibile."/>
 <input name="_next" type="hidden" value="https://tempestosoh.github.io/portfolio/homepage.html"/>
-<!-- Nome -->
 <label for="name">Nome:</label><br/>
 <input id="name" name="name" required="" type="text"/><br/><br/>
-<!-- Email -->
 <label for="email">Email:</label><br/>
 <input id="email" name="email" required="" type="email"/><br/><br/>
-<!-- Messaggio -->
 <label for="message">Messaggio:</label><br/>
 <textarea id="message" name="message" required="" rows="5"></textarea><br/><br/>
-<!-- CAPTCHA -->
 <label for="captcha">Quanto fa <span id="num1"></span> + <span id="num2"></span>?</label><br/>
 <input id="captcha" required="" type="number"/><br/><br/>
-<!-- Pulsante -->
 <button class="btn" type="submit">Invia</button>
 </form>
 </div>
@@ -590,24 +615,54 @@ html {
       const loader = document.getElementById("loader");
       loader.classList.add("hidden");
     });
+
+    // NUOVO JAVASCRIPT PER IL MENU HAMBURGER
+    document.addEventListener("DOMContentLoaded", function() {
+        const hamburger = document.getElementById("hamburgerMenu");
+        hamburger.addEventListener("click", toggleMenu);
+    });
+
     function toggleMenu() {
-  const nav = document.getElementById("mainNav");
-  nav.classList.toggle("show");
-}
+        const nav = document.getElementById("mainNav");
+        const hamburger = document.getElementById("hamburgerMenu");
+
+        nav.classList.toggle("show");
+        hamburger.classList.toggle("open");
+
+        // Impedisci lo scroll quando il menu mobile è aperto
+        if (nav.classList.contains("show")) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+    }
+
+    // Chiudi il menu quando si clicca su un link
+    document.querySelectorAll('#mainNav a').forEach(link => {
+        link.addEventListener('click', () => {
+            const nav = document.getElementById("mainNav");
+            const hamburger = document.getElementById("hamburgerMenu");
+            if (nav.classList.contains("show")) {
+                nav.classList.remove("show");
+                hamburger.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+        });
+    });
   </script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
     particlesJS("particles-js", {
       particles: {
         number: { value: 60, density: { enable: true, value_area: 800 } },
-        color: { value: "#ff0000" },
+        color: { value: "#7B00FF" }, /* Aggiornato al viola principale */
         shape: { type: "circle" },
         opacity: { value: 0.3 },
         size: { value: 3 },
         line_linked: {
           enable: true,
           distance: 150,
-          color: "#ff0000",
+          color: "#7B00FF", /* Aggiornato al viola principale */
           opacity: 0.2,
           width: 1
         },
@@ -633,7 +688,7 @@ html {
   </script>
 <script>
 // Easter Egg in console
-console.log("%c🎉 Complimenti! Hai trovato l'easter egg!\nApri un ticket su Discord per ricevere il tuo premio! 🚀", "color: red; font-size: 16px; font-weight: bold;");
+console.log("%c🎉 Complimenti! Hai trovato l'easter egg!\nApri un ticket su Discord per ricevere il tuo premio! 🚀", "color: #7B00FF; font-size: 16px; font-weight: bold;"); /* Aggiornato al viola principale */
 </script><script>
 // Smooth scroll for nav links
 document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
