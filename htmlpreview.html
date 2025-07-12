@@ -13,8 +13,8 @@
       --secondary: #ccc;
       --card: #1a1a1a;
       --border: #222;
-      --primary: red;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --primary: #9400D3; /* Dark Violet */
+      --shadow: rgba(148, 0, 211, 0.4);
     }
 
     body.light {
@@ -23,8 +23,8 @@
       --secondary: #444;
       --card: #fff;
       --border: #ccc;
-      --primary: darkred;
-      --shadow: rgba(255, 0, 0, 0.1);
+      --primary: #9400D3; /* Dark Violet */
+      --shadow: rgba(148, 0, 211, 0.4);
     }
 
     body {
@@ -96,11 +96,12 @@
       font-weight: bold;
       text-decoration: none;
       display: inline-block;
+      transition: background-color 0.3s ease; /* Added transition */
     }
 
     .buttons button:hover,
     .buttons a:hover {
-      background-color: darkred;
+      background-color: #7a00aa; /* Darker violet for hover */
     }
 
     footer {
