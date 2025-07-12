@@ -13,8 +13,8 @@
       --secondary: #ccc;
       --card: #1a1a1a;
       --border: #222;
-      --primary: red;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --primary: #9400D3; /* Dark Violet */
+      --shadow: rgba(148, 0, 211, 0.4);
     }
 
     body.light {
@@ -23,8 +23,8 @@
       --secondary: #333;
       --card: #fff;
       --border: #ddd;
-      --primary: #e60000;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --primary: #9400D3; /* Dark Violet */
+      --shadow: rgba(148, 0, 211, 0.4);
     }
 
     body {
@@ -83,12 +83,7 @@
       color: var(--text);
     }
 
-    /* Pulsanti desktop */
-    .button-group {
-      display: flex;
-      gap: 12px;
-    }
-
+    /* Pulsanti desktop (ora nel nav) */
     .toggle-btn {
       background: var(--primary);
       color: white;
@@ -102,56 +97,37 @@
     }
 
     .toggle-btn:hover {
-      background: #b30000;
+      background: #7a00aa; /* Darker violet */
     }
 
-    /* Hamburger menu button */
-    .hamburger {
-      display: none;
-      background: var(--primary);
-      color: white;
-      border: none;
-      font-size: 1.8rem;
-      padding: 6px 12px;
-      border-radius: 6px;
+    /* New Hamburger Menu Styles */
+    .hamburger-menu {
+      width: 30px;
+      height: 20px;
+      display: none; /* Hidden by default, shown in media query */
+      flex-direction: column;
+      justify-content: space-between;
       cursor: pointer;
+      z-index: 1000; /* Ensure it's above other elements */
     }
 
-    /* Menu nascosto per mobile */
-    .menu {
-      display: flex;
-      gap: 12px;
+    .hamburger-menu .bar {
+      width: 100%;
+      height: 3px;
+      background-color: var(--text);
+      transition: all 0.3s ease-in-out;
     }
 
-    /* Mobile styles */
-    @media (max-width: 700px) {
-      .button-group {
-        display: none; /* Nascondi i pulsanti desktop */
-      }
+    .hamburger-menu.open .bar:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
 
-      .hamburger {
-        display: block;
-      }
+    .hamburger-menu.open .bar:nth-child(2) {
+      opacity: 0;
+    }
 
-      .menu {
-        position: fixed;
-        top: 60px; /* sotto header */
-        right: 20px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 0 20px var(--shadow);
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-        display: none;
-        z-index: 1000;
-        width: 150px;
-      }
-
-      .menu.active {
-        display: flex;
-      }
+    .hamburger-menu.open .bar:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
     }
 
     main {
@@ -234,7 +210,40 @@
       border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 600px) {
+    /* Mobile styles */
+    @media (max-width: 768px) { /* Consistent breakpoint */
+      .hamburger-menu {
+        display: flex; /* Show hamburger on small screens */
+      }
+
+      nav {
+        display: none; /* Hide regular nav */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 80px; /* Adjust based on header height */
+        left: 0;
+        background: var(--bg);
+        border-bottom: 2px solid var(--border);
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      nav.show {
+        display: flex; /* Show nav when hamburger is open */
+      }
+
+      nav .toggle-btn {
+        margin: 10px 0;
+      }
+
+      header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      }
+
       h1 {
         font-size: 2rem;
       }
@@ -261,9 +270,13 @@
       <span>Tempestosoh</span>
     </div>
 
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+    <div class="hamburger-menu" id="hamburgerMenu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
 
-    <nav class="menu" id="menu">
+    <nav id="mainNav">
       <button class="toggle-btn" onclick="toggleTheme()">🌓 Tema</button>
       <button class="toggle-btn" onclick="window.open('https://tempestosoh.github.io/portfolio/home-beta.html', '_blank')">🚧 Beta</button>
     </nav>
@@ -279,19 +292,18 @@
     &copy; 2025 - Tempestosoh. Tutti i diritti riservati.
   </footer>
 
-  <!-- Easter Egg -->
   <div class="easter-egg" id="easterEgg">
     <button class="close-btn" onclick="closeEasterEgg()">✖</button>
     <img src="https://i.imgur.com/UOLj7bY.jpeg" alt="Signore al cantiere" />
     <p>“Lavori in corso eh... ci voleva proprio!”</p>
   </div>
 
-  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <script>
     function toggleTheme() {
       document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark'); // Added localStorage
     }
 
     // Countdown
@@ -333,30 +345,32 @@
         egg.style.display = "block";
         setTimeout(() => {
           egg.style.display = "none";
+          clickCount = 0; // Reset click count
         }, 5000);
       }
     });
 
-    // Hamburger menu toggle
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const menu = document.getElementById('menu');
+    // New Hamburger Menu Toggle
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const mainNav = document.getElementById('mainNav');
 
-    hamburgerBtn.addEventListener('click', () => {
-      menu.classList.toggle('active');
+    hamburgerMenu.addEventListener('click', () => {
+        hamburgerMenu.classList.toggle('open');
+        mainNav.classList.toggle('show');
     });
 
     // Particles.js config
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ff0000" },
+        "color": { "value": "#9400D3" }, /* Updated to Dark Violet */
         "shape": { "type": "circle" },
         "opacity": { "value": 0.2, "random": true },
         "size": { "value": 3, "random": true },
         "line_linked": {
           "enable": true,
           "distance": 150,
-          "color": "#ff0000",
+          "color": "#9400D3", /* Updated to Dark Violet */
           "opacity": 0.2,
           "width": 1
         },
@@ -373,6 +387,15 @@
       },
       "retina_detect": true
     });
+
+    // Load saved theme on initial page load
+    window.onload = function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+      }
+      updateCountdown(); // Ensure countdown is updated on load
+    };
   </script>
 </body>
 </html>
