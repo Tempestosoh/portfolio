@@ -13,8 +13,8 @@
       --secondary: #ccc;
       --card: #1a1a1a;
       --border: #222;
-      --primary: red;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --primary: #9400D3; /* Dark Violet */
+      --shadow: rgba(148, 0, 211, 0.4); /* Dark Violet Shadow */
     }
     body.light {
       --bg: #f4f4f4;
@@ -22,8 +22,8 @@
       --secondary: #333;
       --card: #fff;
       --border: #ddd;
-      --primary: #e60000;
-      --shadow: rgba(255, 0, 0, 0.2);
+      --primary: #9400D3; /* Dark Violet */
+      --shadow: rgba(148, 0, 211, 0.4); /* Dark Violet Shadow */
     }
     body {
       font-family: 'Poppins', sans-serif;
@@ -32,6 +32,7 @@
       margin: 0;
       padding: 0;
       transition: background 0.3s, color 0.3s;
+      overflow-x: hidden; /* Added to prevent horizontal scroll on mobile menu */
     }
     header {
       display: flex;
@@ -66,7 +67,26 @@
       text-decoration: none;
       color: var(--text);
       font-weight: bold;
+      position: relative; /* Added for underline effect */
     }
+    /* Underline effect for nav links */
+    nav a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        bottom: -5px;
+        left: 0;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+    nav a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
     .toggle-btn {
       margin-left: 20px;
       padding: 6px 14px;
@@ -76,6 +96,11 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      font-family: 'Poppins', sans-serif; /* Added for consistency */
+      transition: background 0.3s;
+    }
+    .toggle-btn:hover {
+      background: #7a00aa; /* Darker violet for hover */
     }
     .section {
       padding: 60px 30px;
@@ -85,6 +110,7 @@
       margin-bottom: 30px;
       border-left: 5px solid var(--primary);
       padding-left: 15px;
+      color: var(--primary); /* Apply primary color */
     }
     .card {
       background: var(--card);
@@ -124,6 +150,10 @@
       font-weight: bold;
       display: inline-block;
       margin-top: 10px;
+      transition: background-color 0.3s ease; /* Added transition */
+    }
+    .btn:hover {
+      background-color: #7a00aa; /* Darker violet for hover */
     }
     .btn.disabled {
       background: #444;
@@ -145,6 +175,13 @@
         display: none;
         flex-direction: column;
         width: 100%;
+        position: absolute; /* Changed to absolute for full width menu */
+        top: 80px; /* Position below header */
+        left: 0;
+        background: var(--bg); /* Ensure background for menu */
+        border-bottom: 2px solid var(--border); /* Add border */
+        padding: 20px 0; /* Add padding */
+        text-align: center;
       }
       nav.show {
         display: flex;
@@ -242,7 +279,26 @@
     }
     function toggleTheme() {
       document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark'); /* Added persistence */
     }
+
+    // Close menu when a navigation link is clicked (for mobile UX)
+    document.querySelectorAll('#mainNav a').forEach(link => {
+        link.addEventListener('click', () => {
+            const nav = document.getElementById("mainNav");
+            if (nav.classList.contains('show')) {
+                nav.classList.remove('show');
+            }
+        });
+    });
+
+    // Apply saved theme on load
+    window.onload = function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+      }
+    };
   </script>
 </body>
 </html>
