@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>DOPAMINA - Sick Luke</title>
+<style>
+  /* Reset rapido */
+  * {margin:0; padding:0; box-sizing:border-box;}
+  body {
+    font-family: 'Arial Black', sans-serif;
+    background: #000;
+    color: #fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    overflow:hidden;
+  }
+  h1 {
+    font-size:4em;
+    letter-spacing:0.1em;
+    color:#ff00ff;
+    animation: glow 1.5s infinite alternate;
+    margin-bottom:0.2em;
+  }
+  h2 {
+    font-size:2em;
+    color:#00ffff;
+    margin-bottom:1em;
+  }
+  #countdown {
+    font-size:3em;
+    color:#fff;
+    font-weight:bold;
+    letter-spacing:0.05em;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  }
+
+  @keyframes glow {
+    from {text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;}
+    to {text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;}
+  }
+</style>
+</head>
+<body>
+  <h1>DOPAMINA</h1>
+  <h2>di SICK LUKE</h2>
+  <div id="countdown">Loading...</div>
+
+<script>
+  // Data di uscita: 5 settembre alle 01:00
+  const releaseDate = new Date("2025-09-05T01:00:00");
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = releaseDate - now;
+
+    if(diff <= 0){
+      document.getElementById('countdown').innerHTML = "È USCITO!";
+      clearInterval(interval);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+    document.getElementById('countdown').innerHTML =
+      `${days}g ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  updateCountdown(); // aggiornamento immediato
+  const interval = setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
